@@ -1,26 +1,137 @@
 import React from 'react';
-import logo from './logo.svg';
+import Particles from 'react-particles-js';
+import Panel from './components/Panel/Panel';
+import Alta from './components/Alta/Alta';
+import Modificar from './components/Modificar/Modificar';
+import Navigation from './components/Navigation/Navigation';
+import Register from './components/Register/Register';
+import SignIn from './components/SignIn/SignIn';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const particleOptions = {
+  "particles": {
+      "number": {
+        "value": 70,
+        "density": {
+          "enable": true,
+          "value_area": 800
+        },
+      },
+      "color": {
+        "value": "#E3F919"
+      },
+      "lineLinked": {
+        "blink": false,
+        "color": {
+          "value": "#E3F919"
+        }
+    }
+  }
+}
+
+const inicialState = {
+  route: 'Inicio',
+  isSignedIn: false,
+  user: {
+    id: '',
+    nombre: '',
+    apellido: '',
+    direccion: '',
+    telefono: ''
+  },
+  producto: {
+    id: '',
+    nombre: '',
+    descripcion: '',
+    precio: 0
+  },
+  pagina: 'inicio',
+}
+
+class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = inicialState;
+  }
+
+  loadUser = (data) => {
+    this.setState({
+      user: {
+        id: data.id,
+        nombre: data.nombre,
+        apellido: data.apellido,
+        direccion: data.direccion,
+        telefono: data.telefono
+      }
+    })
+  }
+
+  onRouteChange = (route, producto) => {
+    if (route === 'Alta') {
+      this.setState({ pagina: 'alta', route });
+    } else if (route === 'Inicio') {
+      this.setState({ pagina: 'inicio', route });
+    } else if (route === 'Modificar') {
+      this.setState({ pagina: 'modificar', producto, route });
+    } else if (route === 'Registrarse') {
+      this.setState({ pagina: 'registrarse', producto, route });
+    } else if (route === 'Ingresar') {
+      this.setState({ pagina: 'ingresar', producto, route });
+    }
+  }
+
+  render(){
+    const { isSignedIn, route, pagina } = this.state;
+    let currentComponent;
+
+    switch (route) {
+      default:
+      case 'Inicio':
+        currentComponent = (
+          <div>
+            <Panel onRouteChange={this.onRouteChange} />
+          </div>
+        );
+        break;
+      case 'Alta':
+        currentComponent = (
+          <div>
+            <Alta onRouteChange={this.onRouteChange}/>
+          </div>
+        );
+        break;
+      case 'Modificar': 
+        currentComponent = (
+          <div>
+            <Modificar producto={this.state.producto} onRouteChange={this.onRouteChange}/>
+          </div>
+        );
+        break;
+      case 'Registrarse':
+        currentComponent = (
+          <div>
+            <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+          </div>
+        );
+        break;
+      case 'Ingresar':
+        currentComponent = (
+          <div>
+            <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
+          </div>
+        );
+          
+    }
+    return (
+      <div className="App">
+        <Particles className='particles'
+        params={particleOptions} />
+        <Navigation isSignedIn={isSignedIn} pagina={pagina} onRouteChange={this.onRouteChange}/>
+        { currentComponent }
+      </div>
+    );
+  }
+  
 }
 
 export default App;
