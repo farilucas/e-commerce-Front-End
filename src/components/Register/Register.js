@@ -4,22 +4,22 @@ class Register extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            username: '',
+            id: '',
             password: '',
             nombre: '',
             apellido: '',
             direccion: '',
             telefono: '',
         }
-        this.onUsernameChange = this.onUsernameChange.bind(this);
+        this.onIdChange = this.onIdChange.bind(this);
         this.onPasswordChange = this.onPasswordChange.bind(this);
         this.onNombreChange = this.onNombreChange.bind(this);
         this.onApellidoChange = this.onApellidoChange.bind(this);
         this.onDireccionChange = this.onDireccionChange.bind(this);
         this.onTelefonoChange = this.onTelefonoChange.bind(this);
     }
-    onUsernameChange = (event) => {
-        this.setState({username: event.target.value});
+    onIdChange = (event) => {
+        this.setState({id: event.target.value});
     }
     onPasswordChange = (event) => {
         this.setState({ password: event.target.value });
@@ -41,7 +41,7 @@ class Register extends React.Component{
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                username: this.state.username,
+                username: this.state.id,
                 password: this.state.passsword,
                 nombre: this.state.nombre,
                 apellido: this.state.apellido,
@@ -68,11 +68,11 @@ class Register extends React.Component{
                             <div className="mt3">
                                 <label className="db fw6 lh-copy f6" htmlFor="username">Usuario</label>
                                 <input
-                                    onChange={this.onUsernameChange}
+                                    onChange={this.onIdChange}
                                     className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                                     type="text"
-                                    name="username"
-                                    id="username" 
+                                    name="id"
+                                    id="id" 
                                     required
                                     />
                             </div>
