@@ -37,7 +37,8 @@ const inicialState = {
     nombre: '',
     apellido: '',
     direccion: '',
-    telefono: ''
+    telefono: '',
+    admin: false
   },
   producto: {
     id: '',
@@ -61,7 +62,8 @@ class App extends React.Component {
         nombre: data.nombre,
         apellido: data.apellido,
         direccion: data.direccion,
-        telefono: data.telefono
+        telefono: data.telefono,
+        admin: data.admin
       }
     })
   }
