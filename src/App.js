@@ -36,6 +36,7 @@ const inicialState = {
     id: '',
     nombre: '',
     apellido: '',
+    email: '',
     direccion: '',
     telefono: '',
     admin: false
@@ -61,6 +62,7 @@ class App extends React.Component {
         id: data.id,
         nombre: data.nombre,
         apellido: data.apellido,
+        email: data.email,
         direccion: data.direccion,
         telefono: data.telefono,
         admin: data.admin
@@ -76,9 +78,9 @@ class App extends React.Component {
     } else if (route === 'Modificar') {
       this.setState({ pagina: 'modificar', producto, route });
     } else if (route === 'Registrarse') {
-      this.setState({ pagina: 'registrarse', producto, route });
+      this.setState({ pagina: 'registrarse', route });
     } else if (route === 'Ingresar') {
-      this.setState({ pagina: 'ingresar', producto, route });
+      this.setState({ pagina: 'ingresar', route });
     }
   }
 

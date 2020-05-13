@@ -8,6 +8,7 @@ class Register extends React.Component{
             password: '',
             nombre: '',
             apellido: '',
+            email: '',
             direccion: '',
             telefono: '',
         }
@@ -15,6 +16,7 @@ class Register extends React.Component{
         this.onPasswordChange = this.onPasswordChange.bind(this);
         this.onNombreChange = this.onNombreChange.bind(this);
         this.onApellidoChange = this.onApellidoChange.bind(this);
+        this.onEmailChange = this.onEmailChange.bind(this);
         this.onDireccionChange = this.onDireccionChange.bind(this);
         this.onTelefonoChange = this.onTelefonoChange.bind(this);
     }
@@ -30,6 +32,9 @@ class Register extends React.Component{
     onApellidoChange = (event) => {
         this.setState({apellido: event.target.value});
     }
+    onEmailChange = (event) => {
+        this.setState({ email: event.target.value });
+    }
     onDireccionChange = (event) => {
         this.setState({ direccion: event.target.value });
     }
@@ -37,7 +42,7 @@ class Register extends React.Component{
         this.setState({ telefono: event.target.value });
     }
     onSubmitSignIn = () => {
-        fetch('http://localhost:3000/register', {
+        fetch('insert path here', {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -45,6 +50,7 @@ class Register extends React.Component{
                 password: this.state.passsword,
                 nombre: this.state.nombre,
                 apellido: this.state.apellido,
+                email: this.state.email,
                 direccion: this.state.direccion,
                 telefono: this.state.telefono,
             })
@@ -53,7 +59,7 @@ class Register extends React.Component{
             .then(user => {
                 if (user.id) {
                     this.props.loadUser(user);
-                    this.props.onRouteChange('home');
+                    this.props.onRouteChange('Inicio');
                 }
             })
     }
@@ -63,7 +69,7 @@ class Register extends React.Component{
             <article className="br3 ba  b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
                 <main className="pa4 black-80">
                     <div className="measure ">
-                        <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
+                        <fieldset id="sign_up" className="ba b--transparent ph0 mh0 tc">
                             <legend className="f1 fw6 ph0 mh0">Registrarse</legend>
                             <div className="mt3">
                                 <label className="db fw6 lh-copy f6" htmlFor="username">Usuario</label>
@@ -103,7 +109,15 @@ class Register extends React.Component{
                                     name="apellido"
                                     id="apellido" />
                             </div>
-                            
+                            <div className="mt3">
+                                <label className="db fw6 lh-copy f6" htmlFor="email">Email</label>
+                                <input
+                                    onChange={this.onEmailChange}
+                                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                                    type="email"
+                                    name="email"
+                                    id="email" />
+                            </div>
                             <div className="mt3">
                                 <label className="db fw6 lh-copy f6" htmlFor="direccion">Direccion</label>
                                 <input
