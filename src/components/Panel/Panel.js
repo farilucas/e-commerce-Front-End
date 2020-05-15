@@ -23,14 +23,16 @@ class Panel extends React.Component{
 
         fetch(`http://localhost:8000/api/productos`, {
             method: "get",
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "Content-Type": "application/json" 
+            },
         }).then(res => res.json())
         .then(json => this.setState({productos: json}));
     };
 
     async onBaja(event, id) {
         event.preventDefault();
-        await fetch('http://localhost:8000/api/productos' + id, {
+        await fetch('http://localhost:8000/api/productos/' + id, {
             method: 'delete',
             headers: { 'Content-Type': 'application/json' },
         });
@@ -75,7 +77,9 @@ class Panel extends React.Component{
 
         return(
             <div className="justify-content-center my-2">
-                <h1>Hola</h1>
+                <div className="">
+                    <button className={"b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"} onClick={() => this.props.onRouteChange('Alta')} >Dar de alta un producto</button>
+                </div>
                 {productos}
             </div>
         )

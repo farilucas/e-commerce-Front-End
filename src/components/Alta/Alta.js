@@ -9,19 +9,14 @@ class Alta extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            id: '',
             nombre: '',
             descripcion: '',
             precio:'',
         }
-        this.onIdChange = this.onIdChange.bind(this);
         this.onNombreChange = this.onNombreChange.bind(this);
         this.onDescripcionChange = this.onDescripcionChange.bind(this);
         this.onPrecioChange = this.onPrecioChange.bind(this);
         this.onSubmitAlta = this.onSubmitAlta.bind(this)
-    }
-    onIdChange = (event) => {
-        this.setState({id: event.target.value});
     }
     onNombreChange = (event) => {
         this.setState({nombre: event.target.value});
@@ -35,13 +30,17 @@ class Alta extends React.Component{
 
     onSubmitAlta(event){
         event.preventDefault();
-        fetch('insert path here',{
+        fetch('http://localhost/api/productos',{
             method: 'post',
-            headers: {'Content-Type': 'application/json'},
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(
-                this.state
+                this.state,
+                console.log(this.state)
             )
         })
+        .then(() => this.props.onRouteChange('Inicio'));
     }
 
     render(){
@@ -51,17 +50,6 @@ class Alta extends React.Component{
                     <div className="measure ">
                         <fieldset id="alta" className="ba b--transparent ph0 mh0">
                             <legend className="f1 fw6 ph0 mh0">Ingrese un producto</legend>
-                            <div className="mt3">
-                                <input
-                                    onChange={this.onIdChange}
-                                    value={this.state.id}
-                                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                    type="text"
-                                    name="id"
-                                    placeholder="ID"
-                                    id="id"
-                                />
-                            </div>
                             <div className="mt3">
                                 <input
                                     onChange={this.onNombreChange}

@@ -32,7 +32,7 @@ const particleOptions = {
 
 const inicialState = {
   route: 'Inicio',
-  isSignedIn: false,
+  isSignedIn: true,
   user: {
     id: '',
     nombre: '',
@@ -40,7 +40,7 @@ const inicialState = {
     email: '',
     direccion: '',
     telefono: '',
-    admin: false
+    admin: true
   },
   productos: {
     id: '',
