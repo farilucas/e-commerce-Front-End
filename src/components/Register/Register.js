@@ -42,7 +42,7 @@ class Register extends React.Component{
         this.setState({ telefono: event.target.value });
     }
     onSubmitSignIn = () => {
-        fetch('insert path here', {
+        fetch('https://my-json-server.typicode.com/farilucas/fakeapi/user', {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

@@ -4,20 +4,20 @@ class SignIn extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            nombre: '',
-            password: '',
+            signInNombre: '',
+            signInPassword: '',
         }
     }
-    onNombreCahnge = (event) =>{
-        this.setState({nombre: event.target.value});
+    onNombreChange = (event) =>{
+        this.setState({signInNombre: event.target.value});
     }
-    onPasswordCahnge = (event) => {
-        this.setState({password: event.target.value });
+    onPasswordChange = (event) => {
+        this.setState({signInPassword: event.target.value });
     }
 
     onSubmitSignIn = (event) => {
         event.preventDefault();
-        fetch('insert path here', {
+        fetch('https://my-json-server.typicode.com/farilucas/fakeapi/signedIn', {
             method: 'POST',
             headers: {
                 "Access-Control-Allow-Origin": "*",

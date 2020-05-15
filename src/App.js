@@ -2,6 +2,7 @@ import React from 'react';
 import Particles from 'react-particles-js';
 import Panel from './components/Panel/Panel';
 import Alta from './components/Alta/Alta';
+import Mis_Productos from './components/Lista Productos/Mis_Productos/Mis_Productos';
 import Modificar from './components/Modificar/Modificar';
 import Navigation from './components/Navigation/Navigation';
 import Register from './components/Register/Register';
@@ -41,7 +42,7 @@ const inicialState = {
     telefono: '',
     admin: false
   },
-  producto: {
+  productos: {
     id: '',
     nombre: '',
     descripcion: '',
@@ -58,23 +59,30 @@ class App extends React.Component {
 
   loadUser = (data) => {
     this.setState({
-      user: {
+      user: data
+    })
+  }
+
+  loadProducto = (data) => {
+    this.setState({
+      producto: {
         id: data.id,
         nombre: data.nombre,
-        apellido: data.apellido,
-        email: data.email,
-        direccion: data.direccion,
-        telefono: data.telefono,
-        admin: data.admin
+        descripcion: data.descripcion,
+        precio: data.precio
       }
     })
   }
 
   onRouteChange = (route, producto) => {
-    if (route === 'Alta') {
+    if (route === 'SignOut') {
+      this.setState(inicialState);
+    } else if (route === 'Alta') {
       this.setState({ pagina: 'alta', route });
     } else if (route === 'Inicio') {
-      this.setState({ pagina: 'inicio', route });
+      this.setState({isSignedIn: false, pagina: 'inicio', route });
+    } else if (route === 'Mis_Productos') {
+      this.setState({ pagina: 'mis_productos', route });
     } else if (route === 'Modificar') {
       this.setState({ pagina: 'modificar', producto, route });
     } else if (route === 'Registrarse') {
@@ -93,14 +101,21 @@ class App extends React.Component {
       case 'Inicio':
         currentComponent = (
           <div>
-            <Panel onRouteChange={this.onRouteChange} />
+            <Panel esAdmin={this.state.user.admin} isSignedIn={isSignedIn} loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
           </div>
         );
         break;
       case 'Alta':
         currentComponent = (
           <div>
-            <Alta onRouteChange={this.onRouteChange}/>
+            <Alta onRouteChange={this.onRouteChange} />
+          </div>
+        );
+        break;
+      case 'Mis_Productos':
+        currentComponent = (
+          <div>
+            <Mis_Productos loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
           </div>
         );
         break;
@@ -121,7 +136,7 @@ class App extends React.Component {
       case 'Ingresar':
         currentComponent = (
           <div>
-            <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
+            <SignIn isSignedIn={isSignedIn} loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
           </div>
         );
           

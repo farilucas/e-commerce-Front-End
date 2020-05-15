@@ -42,6 +42,7 @@ class Productos extends React.Component{
     }
 
     render() {
+        let currentState = this.props.data.productos[0];
         return(
             <div>
                 <Card bg={"light"} style={{ maxWidth: 600 }}>
@@ -55,11 +56,11 @@ class Productos extends React.Component{
                     <Card.Body>
                         <Container>
                             <Row>
-                                <Col><Field >{this.props.data.nombre}</Field></Col>
-                                <Col><Field >{this.props.data.descripcion}</Field></Col>
+                                <Col><Field >{this.props.data.productos.nombre}</Field></Col>
+                                <Col><Field >{this.props.data.productos.descripcion}</Field></Col>
                             </Row>
                             <Row>
-                                <Col><Field >{this.props.data.precio}</Field></Col>
+                                <Col><Field >{this.props.data.productos.precio}</Field></Col>
                             </Row>
                         </Container>
                     </Card.Body>
