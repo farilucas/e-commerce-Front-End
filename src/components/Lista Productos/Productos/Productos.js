@@ -42,29 +42,28 @@ class Productos extends React.Component{
     }
 
     render() {
-        let currentState = this.props.data.productos[0];
         return(
             <div>
-                <Card bg={"light"} style={{ maxWidth: 600 }}>
-                    <Card.Header>
+                <div bg={"light"} style={{ maxWidth: 600 }}>
+                    <div>
                         <div className={"d-flex align-items-center"}>
                             {this.props.data.id}
                             <Button onClick={this.onModificar} className={"ml-auto mr-2"} variant={"primary"} size={"sm"}><FontAwesomeIcon icon={faCog} /></Button>
                             <Button variant={"danger"} size={"sm"} onClick={this.onBaja}><FontAwesomeIcon icon={faTrash} /></Button>
                         </div>
-                    </Card.Header>
-                    <Card.Body>
+                    </div>
+                    <div>
                         <Container>
                             <Row>
-                                <Col><Field >{this.props.data.productos.nombre}</Field></Col>
-                                <Col><Field >{this.props.data.productos.descripcion}</Field></Col>
+                                <Col><Field >{this.props.data.nombre}</Field></Col>
+                                <Col><Field >{this.props.data.descripcion}</Field></Col>
                             </Row>
                             <Row>
-                                <Col><Field >{this.props.data.productos.precio}</Field></Col>
+                                <Col><Field >{this.props.data.precio}</Field></Col>
                             </Row>
                         </Container>
-                    </Card.Body>
-                </Card>
+                    </div>
+                </div>
             </div>   
         );
     }
