@@ -4,7 +4,7 @@ class Register extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            id: '',
+            username: '',
             password: '',
             nombre: '',
             apellido: '',
@@ -21,7 +21,7 @@ class Register extends React.Component{
         this.onTelefonoChange = this.onTelefonoChange.bind(this);
     }
     onIdChange = (event) => {
-        this.setState({id: event.target.value});
+        this.setState({username: event.target.value});
     }
     onPasswordChange = (event) => {
         this.setState({ password: event.target.value });
@@ -42,11 +42,15 @@ class Register extends React.Component{
         this.setState({ telefono: event.target.value });
     }
     onSubmitSignIn = () => {
-        fetch('https://my-json-server.typicode.com/farilucas/fakeapi/user', {
+        let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTcxODcwOSwiZXhwIjoxNTg5NzIyMzA5LCJuYmYiOjE1ODk3MTg3MDksImp0aSI6IlNTM1VJbHF3NGc2U2ZIYVUiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.LLcGl3NfFrIZ7g_mTZHW31ErZcdGlCcitlcKBGfmNdo';
+        fetch('http://localhost:8000/api/usuarios', {
             method: 'post',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer' + token
+            },
             body: JSON.stringify({
-                username: this.state.id,
+                username: this.state.username,
                 password: this.state.passsword,
                 nombre: this.state.nombre,
                 apellido: this.state.apellido,
@@ -55,13 +59,11 @@ class Register extends React.Component{
                 telefono: this.state.telefono,
             })
         })
-            .then(response => response.json())
-            .then(user => {
-                if (user.id) {
-                    this.props.loadUser(user);
-                    this.props.onRouteChange('Inicio');
-                }
-            })
+        .then(response => response.json())
+        .then(
+                this.props.onRouteChange('Inicio')
+    
+        );
     }
 
     render() {
