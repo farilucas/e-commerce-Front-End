@@ -11,16 +11,18 @@ class Register extends React.Component{
             email: '',
             direccion: '',
             telefono: '',
+            admin: 0
         }
-        this.onIdChange = this.onIdChange.bind(this);
+        this.onUsernameChange = this.onUsernameChange.bind(this);
         this.onPasswordChange = this.onPasswordChange.bind(this);
         this.onNombreChange = this.onNombreChange.bind(this);
         this.onApellidoChange = this.onApellidoChange.bind(this);
         this.onEmailChange = this.onEmailChange.bind(this);
         this.onDireccionChange = this.onDireccionChange.bind(this);
         this.onTelefonoChange = this.onTelefonoChange.bind(this);
+        this.onSubmitRegister = this.onSubmitRegister.bind(this);
     }
-    onIdChange = (event) => {
+    onUsernameChange = (event) => {
         this.setState({username: event.target.value});
     }
     onPasswordChange = (event) => {
@@ -41,29 +43,22 @@ class Register extends React.Component{
     onTelefonoChange = (event) => {
         this.setState({ telefono: event.target.value });
     }
-    onSubmitSignIn = () => {
-        let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTcxODcwOSwiZXhwIjoxNTg5NzIyMzA5LCJuYmYiOjE1ODk3MTg3MDksImp0aSI6IlNTM1VJbHF3NGc2U2ZIYVUiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.LLcGl3NfFrIZ7g_mTZHW31ErZcdGlCcitlcKBGfmNdo';
+    onSubmitRegister(event) {
+        event.preventDefault();
+        let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTcyNDE1NCwiZXhwIjoxNTg5NzI3NzU0LCJuYmYiOjE1ODk3MjQxNTQsImp0aSI6IkNvalh3ekZ2dnJYYzR4ZUUiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.ilro50UFbE3lFR1x098OCLTvgMot7-_grefswmhfUqY';
         fetch('http://localhost:8000/api/usuarios', {
             method: 'post',
-            headers: { 
+            headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer' + token
+                "Access-Control-Allow-Origin": "*",
+                'Authorization': 'Bearer ' + token
             },
-            body: JSON.stringify({
-                username: this.state.username,
-                password: this.state.passsword,
-                nombre: this.state.nombre,
-                apellido: this.state.apellido,
-                email: this.state.email,
-                direccion: this.state.direccion,
-                telefono: this.state.telefono,
-            })
+            body: JSON.stringify(
+                this.state,
+                console.log(this.state)
+            )
         })
-        .then(response => response.json())
-        .then(
-                this.props.onRouteChange('Inicio')
-    
-        );
+            .then(() => this.props.onRouteChange('Inicio'));
     }
 
     render() {
@@ -76,22 +71,13 @@ class Register extends React.Component{
                             <div className="mt3">
                                 <label className="db fw6 lh-copy f6" htmlFor="username">Usuario</label>
                                 <input
-                                    onChange={this.onIdChange}
+                                    onChange={this.onUsernameChange}
                                     className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                                     type="text"
                                     name="id"
                                     id="id" 
                                     required
                                     />
-                            </div>
-                            <div className="mt3">
-                                <label className="db fw6 lh-copy f6" htmlFor="nombre">Nombre</label>
-                                <input
-                                    onChange={this.onNombreChange}
-                                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                    type="text"
-                                    name="name"
-                                    id="name" />
                             </div>
                             <div className="mt3">
                                 <label className="db fw6 lh-copy f6" htmlFor="password">Contraseña</label>
@@ -103,15 +89,6 @@ class Register extends React.Component{
                                     id="password" />
                             </div>
                             <div className="mt3">
-                                <label className="db fw6 lh-copy f6" htmlFor="apellido">Apellido</label>
-                                <input
-                                    onChange={this.onApellidoChange}
-                                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                                    type="text"
-                                    name="apellido"
-                                    id="apellido" />
-                            </div>
-                            <div className="mt3">
                                 <label className="db fw6 lh-copy f6" htmlFor="email">Email</label>
                                 <input
                                     onChange={this.onEmailChange}
@@ -119,6 +96,25 @@ class Register extends React.Component{
                                     type="email"
                                     name="email"
                                     id="email" />
+                            </div>
+                            <div className="mt3">
+                                <label className="db fw6 lh-copy f6" htmlFor="nombre">Nombre</label>
+                                <input
+                                    onChange={this.onNombreChange}
+                                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                                    type="text"
+                                    name="name"
+                                    id="name" />
+                            </div>
+                            
+                            <div className="mt3">
+                                <label className="db fw6 lh-copy f6" htmlFor="apellido">Apellido</label>
+                                <input
+                                    onChange={this.onApellidoChange}
+                                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                                    type="text"
+                                    name="apellido"
+                                    id="apellido" />
                             </div>
                             <div className="mt3">
                                 <label className="db fw6 lh-copy f6" htmlFor="direccion">Direccion</label>
@@ -141,7 +137,7 @@ class Register extends React.Component{
                         </fieldset>
                         <div className="">
                             <input
-                                onClick={this.onSubmitSignIn}
+                                onClick={this.onSubmitRegister}
                                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                                 type="submit"
                                 value="Registrarse" />

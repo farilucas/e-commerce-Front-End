@@ -1,4 +1,5 @@
 import React from 'react';
+import token from '../CargarToken/Token';
 import ProductosPanel from "../Lista Productos/Productos/ProductosPanel";
 
 class PanelAdmin extends React.Component {
@@ -8,7 +9,7 @@ class PanelAdmin extends React.Component {
             productos: [],
             admin: true,
             categoria: 'Todos',
-            token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTcxODcwOSwiZXhwIjoxNTg5NzIyMzA5LCJuYmYiOjE1ODk3MTg3MDksImp0aSI6IlNTM1VJbHF3NGc2U2ZIYVUiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.LLcGl3NfFrIZ7g_mTZHW31ErZcdGlCcitlcKBGfmNdo'
+           // token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTcyNDE1NCwiZXhwIjoxNTg5NzI3NzU0LCJuYmYiOjE1ODk3MjQxNTQsImp0aSI6IkNvalh3ekZ2dnJYYzR4ZUUiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.ilro50UFbE3lFR1x098OCLTvgMot7-_grefswmhfUqY'
         }
     }
 
@@ -26,7 +27,7 @@ class PanelAdmin extends React.Component {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
-                'Authorization': 'Bearer ' + this.state.token,
+                'Authorization': 'Bearer ' + token,
             },
         }).then(res => res.json())
             .then(json => this.setState({ productos: json }));
@@ -37,7 +38,7 @@ class PanelAdmin extends React.Component {
         await fetch('http://localhost:8000/api/productos/' + id, {
             method: 'delete',
             headers: {
-                'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.state.token,},
+                'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token,},
         });
 
         this.fetchData();
