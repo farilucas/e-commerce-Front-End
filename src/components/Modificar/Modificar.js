@@ -1,10 +1,4 @@
-import React, { Component } from 'react'
-import Card from "react-bootstrap/Card";
-import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
-import FormGroup from "react-bootstrap/FormGroup";
-import FormLabel from "react-bootstrap/FormLabel";
-import Button from "react-bootstrap/Button";
+import React from 'react';
 
 class Modificar extends React.Component {
     constructor(props) {
@@ -31,81 +25,74 @@ class Modificar extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        fetch('insert path here' + this.props.producto, {
-
+        let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTcxODcwOSwiZXhwIjoxNTg5NzIyMzA5LCJuYmYiOjE1ODk3MTg3MDksImp0aSI6IlNTM1VJbHF3NGc2U2ZIYVUiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.LLcGl3NfFrIZ7g_mTZHW31ErZcdGlCcitlcKBGfmNdo';
+        fetch('http://localhost:8000/api/productos/' + this.props.producto, {
             method: 'put',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
             body: JSON.stringify(
                 this.state
             )
         })
             .then(() => this.props.onRouteChange('Inicio'))
-            .catch(error => console.log('error============:', error));
-    }
-
-    componentDidMount() {
-        fetch('insert path here' + this.props.producto)
-            .then(response => response.json())
-            .then(data =>
-                this.setState({
-                    id: data.id,
-                    marca: data.nombre,
-                    modelo: data.descripcion,
-                    ubicacion: data.precio,
-                })
-            );
     }
 
     render() {
         return (
-            <div className="d-flex justify-content-center mt-5">
-                <Card style={{ minWidth: 350 }}>
-                    <Card.Header className="text-center">
-                        <strong>Modificar</strong>
-                    </Card.Header>
-                    <Form onSubmit={this.handleSubmit}>
-                        <Card.Body className="pb-1">
-                            <FormGroup controlId="id">
-                                <FormLabel>Id</FormLabel>
-                                <FormControl
+            <article className="br3 ba  b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
+                <main className="pa4 black-80">
+                    <div className="measure ">
+                        <fieldset id="alta" className="ba b--transparent ph0 mh0">
+                            <legend className="f1 fw6 ph0 mh0">Modificando Producto</legend>
+                            <div className="mt3">
+                                <legend className="f6 fw6 ph0 mh0">ID:</legend>
+                                <input
+                                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                                     type="text"
-                                    readOnly={true}
-                                    value={this.state.id} />
-                            </FormGroup>
-                            <FormGroup controlId="nombre">
-                                <FormLabel>Nombre</FormLabel>
-                                <FormControl
-                                    name="nombre"
+                                    value={this.state.id}
+                                    readOnly
+                                />
+                            </div>
+                            <div className="mt3">
+                                <legend className="f6 fw6 ph0 mh0">Nombre:</legend>
+                                <input
+                                    onChange={this.handleInputChange}
+                                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                                     type="text"
-                                    placeholder="Ingrese Nombre"
                                     value={this.state.nombre}
-                                    onChange={this.handleInputChange} />
-                            </FormGroup>
-                            <FormGroup controlId="descripcion">
-                                <FormLabel>Descripcion</FormLabel>
-                                <FormControl
-                                    name="descripcion"
+                                    name="nombre"
+                                    id="nombre" />
+                            </div>
+                            <div className="mt3">
+                                <legend className="f6 fw6 ph0 mh0">Descripcion:</legend>
+                                <input
+                                    onChange={this.handleInputChange}
+                                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                                     type="text"
-                                    placeholder="Ingrese Descripcion"
                                     value={this.state.descripcion}
-                                    onChange={this.handleInputChange} />
-                            </FormGroup>
-                            <FormGroup controlId="ubicacion">
-                                <FormLabel>Precio</FormLabel>
-                                <FormControl
-                                    name="precio"
+                                    name="descripcion"
+                                    id="descripcion" />
+                            </div>
+                            <div className="mt3">
+                                <legend className="f6 fw6 ph0 mh0">Precio:</legend>
+                                <input
+                                    onChange={this.handleInputChange}
+                                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                                     type="text"
-                                    placeholder="Ingrese Precio"
                                     value={this.state.precio}
-                                    onChange={this.handleInputChange} />
-                            </FormGroup>
-                        </Card.Body>
-                        <Card.Footer>
-                            <Button variant="primary" type="submit">Enviar</Button>
-                        </Card.Footer>
-                    </Form>
-                </Card>
-            </div>
+                                    name="precio"
+                                    id="precio" />
+                            </div>
+                        </fieldset>
+                        <div className="">
+                            <input
+                                onClick={this.handleSubmit}
+                                className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
+                                type="submit"
+                                value="Modificar" />
+                        </div>
+                    </div>
+                </main>
+            </article>
         );
     }
 }

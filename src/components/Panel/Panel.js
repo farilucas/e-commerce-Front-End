@@ -1,5 +1,5 @@
 import React from 'react';
-import Productos from "../Lista Productos/Productos/Productos";
+import ProductosPanel from "../Lista Productos/Productos/ProductosPanel";
 
 class Panel extends React.Component{
     constructor(props) {
@@ -20,11 +20,10 @@ class Panel extends React.Component{
 
     async fetchData() {
         this.setState({ isFetching: true });
-
-        fetch(`http://localhost:8000/api/productos`, {
+        await fetch(`http://localhost:8000/api/productos`, {
             method: "get",
             headers: { 
-                "Content-Type": "application/json" 
+                "Content-Type": "application/json",
             },
         }).then(res => res.json())
         .then(json => this.setState({productos: json}));
@@ -34,7 +33,10 @@ class Panel extends React.Component{
         event.preventDefault();
         await fetch('http://localhost:8000/api/productos/' + id, {
             method: 'delete',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTcxODcwOSwiZXhwIjoxNTg5NzIyMzA5LCJuYmYiOjE1ODk3MTg3MDksImp0aSI6IlNTM1VJbHF3NGc2U2ZIYVUiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.LLcGl3NfFrIZ7g_mTZHW31ErZcdGlCcitlcKBGfmNdo'
+            },
         });
     }
 
@@ -72,14 +74,11 @@ class Panel extends React.Component{
         let productos = this.state.productos.map(producto => {
             let productData = { ...producto };
 
-            return <Productos data={productData} key={producto.id} onBaja={this.onBaja.bind(this)} onRouteChange={this.props.onRouteChange} />;
+            return <ProductosPanel data={productData} key={producto.id} onBaja={this.onBaja.bind(this)} onRouteChange={this.props.onRouteChange} />;
         })
 
         return(
-            <div className="justify-content-center my-2">
-                <div className="">
-                    <button className={"b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"} onClick={() => this.props.onRouteChange('Alta')} >Dar de alta un producto</button>
-                </div>
+            <div className="">
                 {productos}
             </div>
         )

@@ -1,9 +1,4 @@
 import React from 'react';
-import Card from "react-bootstrap/Card";
-import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
-import FormGroup from "react-bootstrap/FormGroup";
-import Button from "react-bootstrap/Button";
 
 class Alta extends React.Component{
     constructor(props){
@@ -12,7 +7,7 @@ class Alta extends React.Component{
             nombre: '',
             descripcion: '',
             precio:'',
-        }
+            }
         this.onNombreChange = this.onNombreChange.bind(this);
         this.onDescripcionChange = this.onDescripcionChange.bind(this);
         this.onPrecioChange = this.onPrecioChange.bind(this);
@@ -30,10 +25,13 @@ class Alta extends React.Component{
 
     onSubmitAlta(event){
         event.preventDefault();
-        fetch('http://localhost/api/productos',{
+        let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTcxODcwOSwiZXhwIjoxNTg5NzIyMzA5LCJuYmYiOjE1ODk3MTg3MDksImp0aSI6IlNTM1VJbHF3NGc2U2ZIYVUiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.LLcGl3NfFrIZ7g_mTZHW31ErZcdGlCcitlcKBGfmNdo';
+        fetch('http://localhost:8000/api/productos',{
             method: 'post',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "*",
+                'Authorization': 'Bearer ' + token
             },
             body: JSON.stringify(
                 this.state,

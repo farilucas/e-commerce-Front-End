@@ -1,8 +1,9 @@
 import React from 'react';
 import Particles from 'react-particles-js';
 import Panel from './components/Panel/Panel';
+import PanelAdmin from './components/Panel/PanelAdmin';
 import Alta from './components/Alta/Alta';
-import Mis_Productos from './components/Lista Productos/Mis_Productos/Mis_Productos';
+import Carrito from './components/Lista Productos/Carrito/Carrito';
 import Modificar from './components/Modificar/Modificar';
 import Navigation from './components/Navigation/Navigation';
 import Register from './components/Register/Register';
@@ -32,14 +33,10 @@ const particleOptions = {
 
 const inicialState = {
   route: 'Inicio',
-  isSignedIn: true,
+  isSignedIn: false,
   user: {
-    id: '',
-    nombre: '',
-    apellido: '',
-    email: '',
-    direccion: '',
-    telefono: '',
+    username: '',
+    token: '',
     admin: true
   },
   productos: {
@@ -80,9 +77,9 @@ class App extends React.Component {
     } else if (route === 'Alta') {
       this.setState({ pagina: 'alta', route });
     } else if (route === 'Inicio') {
-      this.setState({isSignedIn: false, pagina: 'inicio', route });
-    } else if (route === 'Mis_Productos') {
-      this.setState({ pagina: 'mis_productos', route });
+      this.setState({isSignedIn: true, pagina: 'inicio', route });
+    } else if (route === 'Carrito') {
+      this.setState({ pagina: 'carrito', route });
     } else if (route === 'Modificar') {
       this.setState({ pagina: 'modificar', producto, route });
     } else if (route === 'Registrarse') {
@@ -93,7 +90,7 @@ class App extends React.Component {
   }
 
   render(){
-    const { isSignedIn, route, pagina } = this.state;
+    const { isSignedIn, route, pagina} = this.state;
     let currentComponent;
 
     switch (route) {
@@ -101,7 +98,10 @@ class App extends React.Component {
       case 'Inicio':
         currentComponent = (
           <div>
-            <Panel esAdmin={this.state.user.admin} isSignedIn={isSignedIn} loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
+            { this.state.user.admin === false
+              ?<Panel isSignedIn={isSignedIn} esAdmin={this.state.user.admin} loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
+              :<PanelAdmin isSignedIn={isSignedIn} loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
+            }
           </div>
         );
         break;
@@ -112,10 +112,10 @@ class App extends React.Component {
           </div>
         );
         break;
-      case 'Mis_Productos':
+      case 'Carrito':
         currentComponent = (
           <div>
-            <Mis_Productos loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
+            <Carrito loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
           </div>
         );
         break;

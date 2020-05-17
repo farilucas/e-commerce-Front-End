@@ -4,7 +4,8 @@ const Navigation = ({ onRouteChange, isSignedIn, pagina }) => {
     if (isSignedIn) {
         return (
             <nav style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <p onClick={() => onRouteChange('Mis_Productos')} className='f3 link dim black  underline pa3 pointer'>Mis_Productos</p>
+                <p onClick={() => onRouteChange('Inicio')} className='f3 link dim black  underline pa3 pointer'>Inicio</p>
+                <p onClick={() => onRouteChange('Carrito')} className='f3 link dim black  underline pa3 pointer'>Carrito</p>
                 <p onClick={() => onRouteChange('SignOut')} className='f3 link dim black  underline pa3 pointer'>Salir</p>
             </nav>
         );
