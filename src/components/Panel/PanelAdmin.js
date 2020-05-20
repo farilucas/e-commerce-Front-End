@@ -8,6 +8,7 @@ class PanelAdmin extends React.Component {
             productos: [],
             admin: true,
             categoria: 'Todos',
+            token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTk3NzQ5MywiZXhwIjoxNTg5OTgxMDkzLCJuYmYiOjE1ODk5Nzc0OTMsImp0aSI6InJUOG10TGd3NG41elEzdGEiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.a1Wt7k8J69V78-YBS-Iohrv9h1Cz4djhxe1aKAMKeMo',
         }
     }
 
@@ -21,12 +22,11 @@ class PanelAdmin extends React.Component {
 
     async fetchData() {
         this.setState({ isFetching: true });
-        let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTkxMTkxNiwiZXhwIjoxNTg5OTE1NTE2LCJuYmYiOjE1ODk5MTE5MTYsImp0aSI6IkVNTHFCUGhiWTFjVkNmQjciLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.nT1a_QuGhwsF_Hrb7ec-jEvTePujelMzjoo_CAQGz6A'
         await fetch(`http://localhost:8000/api/productos`, {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
-                'Authorization': 'Bearer ' + token,
+                'Authorization': 'Bearer ' + this.state.token,
             },
         }).then(res => res.json())
             .then(json => this.setState({ productos: json }));
@@ -34,11 +34,10 @@ class PanelAdmin extends React.Component {
 
     async onBaja(event, id) {
         event.preventDefault();
-        let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTk3MzM1MSwiZXhwIjoxNTg5OTc2OTUxLCJuYmYiOjE1ODk5NzMzNTEsImp0aSI6ImFBUTRzZUJUWThIMTloZGEiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.tv1FP2jM-TGiDlVKLyf4hebyFjI3hW6dXcMGqvOfaxc'
         await fetch('http://localhost:8000/api/productos/' + id, {
             method: 'delete',
             headers: {
-                'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token,},
+                'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.state.token,},
         });
 
         this.fetchData();

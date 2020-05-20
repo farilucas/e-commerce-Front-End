@@ -11,8 +11,7 @@ class ProductosPanel extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            producto_id: 0,
-            cantidad: 0
+            token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTk3NzQ5MywiZXhwIjoxNTg5OTgxMDkzLCJuYmYiOjE1ODk5Nzc0OTMsImp0aSI6InJUOG10TGd3NG41elEzdGEiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.a1Wt7k8J69V78-YBS-Iohrv9h1Cz4djhxe1aKAMKeMo'
         }
         this.onModificar = this.onModificar.bind(this);
         this.onBaja = this.onBaja.bind(this);
@@ -34,21 +33,23 @@ class ProductosPanel extends React.Component {
 
     async agregarAlCarrito(event, id){
         event.preventDefault();
-        let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTk3MzM1MSwiZXhwIjoxNTg5OTc2OTUxLCJuYmYiOjE1ODk5NzMzNTEsImp0aSI6ImFBUTRzZUJUWThIMTloZGEiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.tv1FP2jM-TGiDlVKLyf4hebyFjI3hW6dXcMGqvOfaxc';
-        await fetch(`http://localhost:8000/api/usuarios/tinchorin/carrito`, {
+          await fetch(`http://localhost:8000/api/usuarios/tinchorin/carrito`, {
             method: 'post',
             headers: {
                 "Content-Type": "application/json",
-                'Authorization': 'Bearer ' + token,
+                'Authorization': 'Bearer ' + this.state.token,
             },
             body: JSON.stringify(
-                this.props.data.id,
-                this.props.data.cantidad,
+                [{
+                    producto_id: 0,
+                    cantidad: 0
+                }],
+                this.state.cantidad,
                 console.log(this.props.data.id, this.props.data.cantidad)
             )
         }).then(res => res.json())
         .then(json => this.setState({
-            producto_id: json, cantidad: json 
+            producto_id: json, cantidad: 10 
         }))
     }
 

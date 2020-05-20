@@ -25,7 +25,7 @@ class Modificar extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTkwOTE4NSwiZXhwIjoxNTg5OTEyNzg1LCJuYmYiOjE1ODk5MDkxODUsImp0aSI6InN3WVo5SkUyNm9mNUM0SDAiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.wyfFBZIOfNSSS5w4Y-qCB28086QaZFaj2cAzxyZeQcY';
+        let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTk3NzQ5MywiZXhwIjoxNTg5OTgxMDkzLCJuYmYiOjE1ODk5Nzc0OTMsImp0aSI6InJUOG10TGd3NG41elEzdGEiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.a1Wt7k8J69V78-YBS-Iohrv9h1Cz4djhxe1aKAMKeMo';
         fetch('http://localhost:8000/api/productos/' + this.props.producto, {
             method: 'put',
             headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
