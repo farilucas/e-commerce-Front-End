@@ -4,6 +4,7 @@ import Panel from './components/Panel/Panel';
 import PanelAdmin from './components/Panel/PanelAdmin';
 import Alta from './components/Alta/Alta';
 import Carrito from './components/Lista Productos/Carrito/Carrito';
+import MisPedidosAdmin from './components/Lista Productos/MisProductos/MisPedidosAdmin';
 import Modificar from './components/Modificar/Modificar';
 import Navigation from './components/Navigation/Navigation';
 import Register from './components/Register/Register';
@@ -45,6 +46,11 @@ const inicialState = {
     descripcion: '',
     precio: 0
   },
+  pedidos: {
+    id: '',
+    username_usuario: '',
+    estado: '',
+  },
   pagina: 'inicio',
 }
 
@@ -71,6 +77,10 @@ class App extends React.Component {
     })
   }
 
+  loadPedido = (data) => {
+    this.setState({ pedido: data })
+  }
+
   onRouteChange = (route, producto) => {
     if (route === 'SignOut') {
       this.setState(inicialState);
@@ -80,6 +90,8 @@ class App extends React.Component {
       this.setState({isSignedIn: true, pagina: 'inicio', route });
     } else if (route === 'Carrito') {
       this.setState({ pagina: 'carrito', route });
+    } else if (route === 'MisPedidos') {
+      this.setState({ pagina: 'misPedidos', route });
     } else if (route === 'Modificar') {
       this.setState({ pagina: 'modificar', producto, route });
     } else if (route === 'Registrarse') {
@@ -99,7 +111,7 @@ class App extends React.Component {
         currentComponent = (
           <div>
             { this.state.user.admin === false
-              ?<Panel isSignedIn={isSignedIn} esAdmin={this.state.user.admin} loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
+              ?<Panel isSignedIn={isSignedIn} esAdmin={this.state.user.admin} userId={this.state.user.username}  loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
               :<PanelAdmin isSignedIn={isSignedIn} loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
             }
           </div>
@@ -116,6 +128,13 @@ class App extends React.Component {
         currentComponent = (
           <div>
             <Carrito loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
+          </div>
+        );
+        break;
+      case 'MisPedidos':
+        currentComponent = (
+          <div>
+            <MisPedidosAdmin loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
           </div>
         );
         break;

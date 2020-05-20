@@ -6,7 +6,9 @@ class Panel extends React.Component{
         super(props);
         this.state ={
             productos: [],
-            categoria: 'Todos'
+            usuarios: [],
+            categoria: 'Todos',
+            token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTk3MzM1MSwiZXhwIjoxNTg5OTc2OTUxLCJuYmYiOjE1ODk5NzMzNTEsImp0aSI6ImFBUTRzZUJUWThIMTloZGEiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.tv1FP2jM-TGiDlVKLyf4hebyFjI3hW6dXcMGqvOfaxc'
         }
     }
 
@@ -24,6 +26,7 @@ class Panel extends React.Component{
             method: "get",
             headers: { 
                 "Content-Type": "application/json",
+                'Authorization': 'Bearer ' + this.state.token,
             },
         }).then(res => res.json())
         .then(json => this.setState({productos: json}));
@@ -31,11 +34,10 @@ class Panel extends React.Component{
 
     async onBaja(event, id) {
         event.preventDefault();
-        await fetch('http://localhost:8000/api/productos/' + id, {
+        await fetch('http://localhost:8000/api/productos/', {
             method: 'delete',
             headers: { 
                 'Content-Type': 'application/json',
-                'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTcyNDE1NCwiZXhwIjoxNTg5NzI3NzU0LCJuYmYiOjE1ODk3MjQxNTQsImp0aSI6IkNvalh3ekZ2dnJYYzR4ZUUiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.ilro50UFbE3lFR1x098OCLTvgMot7-_grefswmhfUqY'
             },
         });
     }
@@ -70,10 +72,15 @@ class Panel extends React.Component{
                 </article>
             );
         }
-
+        
+        let usuarios = this.state.usuarios.map(usuario => {
+            let userData = { ...usuario }
+            return userData;
+        })
+        
         let productos = this.state.productos.map(producto => {
             let productData = { ...producto };
-
+            
             return <ProductosPanel data={productData} key={producto.id} onBaja={this.onBaja.bind(this)} onRouteChange={this.props.onRouteChange} />;
         })
 

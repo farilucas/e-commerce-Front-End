@@ -11,6 +11,7 @@ class Register extends React.Component{
             email: '',
             direccion: '',
             telefono: '',
+            token: '',
             admin: 0
         }
         this.onUsernameChange = this.onUsernameChange.bind(this);
@@ -43,9 +44,11 @@ class Register extends React.Component{
     onTelefonoChange = (event) => {
         this.setState({ telefono: event.target.value });
     }
+
+
     onSubmitRegister(event) {
+        let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTgwOTgwOSwiZXhwIjoxNTg5ODEzNDA5LCJuYmYiOjE1ODk4MDk4MDksImp0aSI6ImRwZjdTQTd1SGdZZ1p3OWoiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.CrAStULj39h-Xa_NWKwsexfEyPyuuQb9Lq3f6nwGCyU";
         event.preventDefault();
-        let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTcyNDE1NCwiZXhwIjoxNTg5NzI3NzU0LCJuYmYiOjE1ODk3MjQxNTQsImp0aSI6IkNvalh3ekZ2dnJYYzR4ZUUiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.ilro50UFbE3lFR1x098OCLTvgMot7-_grefswmhfUqY';
         fetch('http://localhost:8000/api/usuarios', {
             method: 'post',
             headers: {
@@ -58,7 +61,7 @@ class Register extends React.Component{
                 console.log(this.state)
             )
         })
-            .then(() => this.props.onRouteChange('Inicio'));
+        .then(() => this.props.onRouteChange('Inicio'));
     }
 
     render() {

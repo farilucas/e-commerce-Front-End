@@ -6,8 +6,6 @@ class PanelAdmin extends React.Component {
         super(props);
         this.state = {
             productos: [],
-            admin: true,
-            categoria: 'Todos',
         }
     }
 
@@ -15,14 +13,10 @@ class PanelAdmin extends React.Component {
         this.fetchData();
     }
 
-    onCategoriaSelect(event) {
-        this.setState({ categoria: event.target.value });
-    }
-
     async fetchData() {
         this.setState({ isFetching: true });
-        let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTkxMTkxNiwiZXhwIjoxNTg5OTE1NTE2LCJuYmYiOjE1ODk5MTE5MTYsImp0aSI6IkVNTHFCUGhiWTFjVkNmQjciLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.nT1a_QuGhwsF_Hrb7ec-jEvTePujelMzjoo_CAQGz6A'
-        await fetch(`http://localhost:8000/api/productos`, {
+        let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTgxMTczMiwiZXhwIjoxNTg5ODE1MzMyLCJuYmYiOjE1ODk4MTE3MzIsImp0aSI6IlpyMjY5Y0xhREtQbEo4OFoiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.xXCh624y5027YwnXxBt31AGNiPRGLYaf-chTtUNaGWo'
+        await fetch(`http://localhost:8000/api/pedido_producto`, {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
@@ -34,11 +28,12 @@ class PanelAdmin extends React.Component {
 
     async onBaja(event, id) {
         event.preventDefault();
-        let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTk3MzM1MSwiZXhwIjoxNTg5OTc2OTUxLCJuYmYiOjE1ODk5NzMzNTEsImp0aSI6ImFBUTRzZUJUWThIMTloZGEiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.tv1FP2jM-TGiDlVKLyf4hebyFjI3hW6dXcMGqvOfaxc'
-        await fetch('http://localhost:8000/api/productos/' + id, {
+        let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTgxMTczMiwiZXhwIjoxNTg5ODE1MzMyLCJuYmYiOjE1ODk4MTE3MzIsImp0aSI6IlpyMjY5Y0xhREtQbEo4OFoiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.xXCh624y5027YwnXxBt31AGNiPRGLYaf-chTtUNaGWo'
+        await fetch('http://localhost:8000/api/pedido_producto/' + id, {
             method: 'delete',
             headers: {
-                'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token,},
+                'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token,
+            },
         });
 
         this.fetchData();
@@ -64,12 +59,11 @@ class PanelAdmin extends React.Component {
         let productos = this.state.productos.map(producto => {
             let productData = { ...producto };
 
-            return <ProductosPanel esAdmin={this.state.admin} data={productData} key={producto.id} onBaja={this.onBaja.bind(this)} onRouteChange={this.props.onRouteChange} />;
+            return <ProductosPedido data={productData} key={producto.id} onBaja={this.onBaja.bind(this)}/>;
         })
 
         return (
             <div className="flex flex-column">
-                <button className={"b ph3 pv2 input-reset ba b--black bg-transparent fr pointer w-20 self-end"} style={{ justifyContent: 'flex-end' }} onClick={() => this.props.onRouteChange('Alta')} >Dar de alta un producto</button>
                 {productos}
             </div>
         )

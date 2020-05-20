@@ -10,8 +10,13 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
 class ProductosPanel extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            producto_id: 0,
+            cantidad: 0
+        }
         this.onModificar = this.onModificar.bind(this);
         this.onBaja = this.onBaja.bind(this);
+        this.agregarAlCarrito = this.agregarAlCarrito.bind(this);
         this.onDetalles = this.onDetalles.bind(this);
     }
 
@@ -27,48 +32,32 @@ class ProductosPanel extends React.Component {
         this.props.onRouteChange('Detalles', this.props.data.id);
     }
 
+    async agregarAlCarrito(event, id){
+        event.preventDefault();
+        let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTk3MzM1MSwiZXhwIjoxNTg5OTc2OTUxLCJuYmYiOjE1ODk5NzMzNTEsImp0aSI6ImFBUTRzZUJUWThIMTloZGEiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.tv1FP2jM-TGiDlVKLyf4hebyFjI3hW6dXcMGqvOfaxc';
+        await fetch(`http://localhost:8000/api/usuarios/tinchorin/carrito`, {
+            method: 'post',
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': 'Bearer ' + token,
+            },
+            body: JSON.stringify(
+                this.props.data.id,
+                this.props.data.cantidad,
+                console.log(this.props.data.id, this.props.data.cantidad)
+            )
+        }).then(res => res.json())
+        .then(json => this.setState({
+            producto_id: json, cantidad: json 
+        }))
+    }
+
     render() {
         const style = {
             borderColor: "black"
         }
         if(this.props.esAdmin === true){
             return (
-                // <Card bg={"white"} style={{ maxWidth: 600, maxHeight: 100 }}>
-                //     <Card.Body>
-                //         <Container>
-                //             <Row classNamme="text-center">
-                //                 <Col className="border text-center" style={style}>
-                //                     <Row className="border border-right-0" style={style}>
-                //                         <b className="text-center">Nombre</b> 
-                //                     </Row>
-                //                     <Row className="">
-                //                         <b>{this.props.data.nombre}</b>
-                //                     </Row>
-                //                 </Col>
-                //                 <Col className="border" style={style}>
-                //                     <Row className="border border-right-0" style={style}>
-                //                         <b>Descripcion</b>
-                //                     </Row>
-                //                     <Row>
-                //                         <b>{this.props.data.descripcion}</b>
-                //                     </Row>
-                //                 </Col>
-                //                 <Col className="border" style={style}>
-                //                     <Row className="border border-left-0 border-right-0" style={style}>
-                //                         <b>Precio</b>
-                //                     </Row>
-                //                     <Row>
-                //                         <b>{this.props.data.precio}</b>
-                //                     </Row>
-                //                 </Col>
-                //                 <Col>
-                //                     <Button onClick={this.onDetalles} className="w-100">Ver Detalles</Button>
-                //                 </Col>
-                //             </Row>                       
-                //         </Container>
-                //     </Card.Body>
-                // </Card>
-
                 <Container className="table table-bordered table-sm table-light" style={style}>
                     <div className={"d-flex align-items-center"}>
                         {this.props.data.id}
@@ -115,6 +104,7 @@ class ProductosPanel extends React.Component {
                                 <Col className="border" style={style}>${this.props.data.precio}</Col>
                             </Row>
                             <Row className="table-light">
+                                <Col colSpan="4"><button onClick={this.agregarAlCarrito} className="b pv2 input-reset mt3 ba b--black hover-bg-lightest-blue pointer w-100">Agregar al Carrito!</button></Col>
                                 <Col colSpan="4"><button onClick={this.onDetalles} className="b pv2 input-reset mt3 ba b--black hover-bg-lightest-blue pointer w-100">Ver Detalles</button></Col>
                             </Row>
                         </tbody>
