@@ -9,9 +9,9 @@ class Carrito extends React.Component {
         this.state = {
             productos: [],
             estado: '',
-            token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTk3NzQ5MywiZXhwIjoxNTg5OTgxMDkzLCJuYmYiOjE1ODk5Nzc0OTMsImp0aSI6InJUOG10TGd3NG41elEzdGEiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.a1Wt7k8J69V78-YBS-Iohrv9h1Cz4djhxe1aKAMKeMo'
+            token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTk4MTc5NSwiZXhwIjoxNTg5OTg1Mzk1LCJuYmYiOjE1ODk5ODE3OTUsImp0aSI6IkhXZ0tQSDhXSExNQlBnWW0iLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.S7WesigrULB5kODZQ7vd33TQAlP9VY757uWj5DsLx-w'
         }
-        this.onSubmitCarrito = this.onSubmitCarrito.bind(this)
+        this.onSubmitEstado = this.onSubmitEstado.bind(this)
     }
 
     componentDidMount() {
@@ -32,7 +32,7 @@ class Carrito extends React.Component {
 
     // }
 
-    onSubmitCarrito(event) {
+    onSubmitEstado(event) {
         event.preventDefault();
         fetch('http://localhost/api/productos', {
             method: 'post',

@@ -6,10 +6,24 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
 class Productos extends React.Component{
     constructor(props) {
         super(props);
+        this.state = {
+            cantidad: 0
+        }
         this.onModificar = this.onModificar.bind(this);
         this.onBaja = this.onBaja.bind(this);
         this.onDetalles = this.onDetalles.bind(this);
         this.cambiarCantidad = this.cambiarCantidad.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
+
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
     }
 
     onModificar() {
@@ -24,19 +38,19 @@ class Productos extends React.Component{
         this.props.onRouteChange('Detalles', this.props.data.id);
     }
 
-    // cambiarCantidad() {
-    //     this.props.cambiarCantidad(this.props.data.cantidad);
-    // }
-
     cambiarCantidad() {
         fetch(`http://localhost:8000/api/usuarios/tinchorin/carrito`, {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTk3NzQ5MywiZXhwIjoxNTg5OTgxMDkzLCJuYmYiOjE1ODk5Nzc0OTMsImp0aSI6InJUOG10TGd3NG41elEzdGEiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.a1Wt7k8J69V78-YBS-Iohrv9h1Cz4djhxe1aKAMKeMo'
+                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTk3OTA1NywiZXhwIjoxNTg5OTgyNjU3LCJuYmYiOjE1ODk5NzkwNTcsImp0aSI6IlhKNDRVYW5aMkJrdldpeE8iLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.ECydHumpfR8FC0xsv0DMl6RJSM0pdgeST852VZ6gg50'
             },
             body: JSON.stringify(
-                this.props.data.cantidad
+                {
+                    producto_id: this.props.data.id,
+                    cantidad: this.state.cantidad,
+                },
+                console.log(this.props.data.id, this.state.cantidad)
             )
         }).then(json => this.setState({
             cantidad: json
@@ -80,10 +94,10 @@ class Productos extends React.Component{
                         <td style={style}>{this.props.data.nombre}</td>
                         <td style={style}>{this.props.data.descripcion}</td>
                         <td style={style}>${this.props.data.precio}</td>
-                        <td style={style}><input type="number" placeholder={this.props.data.cantidad}></input></td>
+                        <td style={style}><input type="number" pattern="[0-9]" onChange={this.handleInputChange} name="cantidad" id="cantidad" placeholder={this.props.data.cantidad}></input></td>
                     </tr>
                     <tr className="table-light">
-                        <td colSpan="4"><button onClick={this.cambiarCantidad} className="b pv2 input-reset ba b--black bg-transparent grow pointer f6 dib w-100">Confirmar Cantidad</button></td>
+                        <td colSpan="4"><button onClick={this.cambiarCantidad} value={this.state.cantidad} className="b pv2 input-reset ba b--black bg-transparent grow pointer f6 dib w-100">Confirmar Cantidad</button></td>
                     </tr>
                     <tr className="table-light">
                         <td colSpan="4"><button onClick={this.onDetalles} className="b pv2 input-reset ba b--black bg-transparent grow pointer f6 dib w-100">Ver Detalles</button></td>
