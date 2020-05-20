@@ -9,7 +9,7 @@ class Carrito extends React.Component {
         this.state = {
             productos: [],
             estado: '',
-            token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTk4MTc5NSwiZXhwIjoxNTg5OTg1Mzk1LCJuYmYiOjE1ODk5ODE3OTUsImp0aSI6IkhXZ0tQSDhXSExNQlBnWW0iLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.S7WesigrULB5kODZQ7vd33TQAlP9VY757uWj5DsLx-w'
+            token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTk4MzU4NSwiZXhwIjoxNTg5OTg3MTg1LCJuYmYiOjE1ODk5ODM1ODUsImp0aSI6IkloQVhQNWJCOUJjbm1CR00iLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.8NQOSK7fvvWadLHq9RMyV0Z3A1pTYl43OSeN317dO0o'
         }
         this.onSubmitEstado = this.onSubmitEstado.bind(this)
     }
@@ -34,8 +34,8 @@ class Carrito extends React.Component {
 
     onSubmitEstado(event) {
         event.preventDefault();
-        fetch('http://localhost/api/productos', {
-            method: 'post',
+        fetch('http://localhost:8000/api/usuarios/tinchorin/carrito/pagar', {
+            method: 'put',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + this.state.token,
@@ -70,7 +70,7 @@ class Carrito extends React.Component {
             method: 'delete',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.state.token
+                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTk4MzU4NSwiZXhwIjoxNTg5OTg3MTg1LCJuYmYiOjE1ODk5ODM1ODUsImp0aSI6IkloQVhQNWJCOUJjbm1CR00iLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.8NQOSK7fvvWadLHq9RMyV0Z3A1pTYl43OSeN317dO0o'
             }
         })
 
@@ -100,7 +100,7 @@ class Carrito extends React.Component {
         // }
         return (
             <div>
-                <button onClick={this.onSubmitCarrito} className="b pv2 ba b--black bg-orange pointer f6 fr w-100" style={{justifyContent: 'flex-end'}}>Finalizar Compra</button>
+                <button onClick={this.onSubmitEstado} className="b pv2 ba b--black bg-orange pointer f6 fr w-100" style={{justifyContent: 'flex-end'}}>Finalizar Compra</button>
                 {productos}
             </div>
         );
