@@ -43,8 +43,8 @@ class MisPedidos extends React.Component {
             .then(json =>
                 this.setState({
                     pedidos: json,
-                })
-                );
+                }))
+                .then(console.log(this.state.pedidos));
     };
   
     render() {

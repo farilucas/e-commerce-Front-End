@@ -2,7 +2,6 @@ import React from "react";
 import ProductosCarrito from "../Productos/ProductosCarrito";
 
 
-
 class Carrito extends React.Component {
     constructor(props) {
         super(props);
@@ -61,7 +60,7 @@ class Carrito extends React.Component {
                 this.setState({ 
                     productos: json,
                     estado: 'carrito'
-                }));
+                })).then(console.log(this.state.productos));
     };
 
     async onBaja(event, id) {
