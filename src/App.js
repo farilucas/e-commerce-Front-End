@@ -5,6 +5,7 @@ import PanelAdmin from './components/Panel/PanelAdmin';
 import Alta from './components/Alta/Alta';
 import Carrito from './components/Lista Productos/Carrito/Carrito';
 import MisPedidos from './components/Lista Productos/MisProductos/MisPedidos';
+import MisPedidosAdmin from './components/Lista Productos/MisProductos/MisPedidosAdmin';
 import Modificar from './components/Modificar/Modificar';
 import Navigation from './components/Navigation/Navigation';
 import Register from './components/Register/Register';
@@ -38,7 +39,7 @@ const inicialState = {
   user: {
     username: '',
     token: '',
-    admin: false
+    admin: true
   },
   productos: {
     id: '',
@@ -134,7 +135,10 @@ class App extends React.Component {
       case 'MisPedidos':
         currentComponent = (
           <div>
-            <MisPedidos loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
+            { this.state.user.admin === false
+              ?<MisPedidos loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
+              :<MisPedidosAdmin loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
+            }
           </div>
         );
         break;

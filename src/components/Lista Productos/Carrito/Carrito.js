@@ -16,20 +16,6 @@ class Carrito extends React.Component {
     componentDidMount() {
         this.fetchData();
     }
-    
-    // cambiarCantidad() {
-    //     fetch(`http://localhost:8000/api/usuarios/tinchorin/carrito`, {
-    //         method: 'put',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTk3MzM1MSwiZXhwIjoxNTg5OTc2OTUxLCJuYmYiOjE1ODk5NzMzNTEsImp0aSI6ImFBUTRzZUJUWThIMTloZGEiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.tv1FP2jM-TGiDlVKLyf4hebyFjI3hW6dXcMGqvOfaxc'
-    //         },
-    //         body: JSON.stringify(
-    //             this.state.productos.cantidad
-    //         )
-    //     })
-
-    // }
 
     onSubmitEstado(event) {
         event.preventDefault();

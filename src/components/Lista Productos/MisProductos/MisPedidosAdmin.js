@@ -8,42 +8,49 @@ class MisPedidosAdmin extends React.Component {
         super(props);
         this.state = {
             pedidos: [],
-            estado: 'carrito'
+            estado: '',
+            token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU5MDA3OTA4MiwiZXhwIjoxNTkwMDgyNjgyLCJuYmYiOjE1OTAwNzkwODIsImp0aSI6Ik1KbFZFRmZ3N2I0TFQ1SmYiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.iFxFNFtpK-UPgsL-vih7svsJusuvbUDPeRkHmyvpBec'
         }
-        this.setEstado = this.setEstado.bind(this);
-    }
-
-    setEstado(event){
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        });
+        this.cambiarEstado = this.cambiarEstado.bind(this);
     }
 
     componentDidMount() {
-        this.fetchData();
+        this.fetchData()
+    }
+
+    cambiarEstado(){
+        fetch("http://localhost:8000/api/pedidos/1?estado=pago", {
+            method: 'put',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.state.token,
+            },
+            body: JSON.stringify(
+                this.state
+            )
+        })
     }
 
     async fetchData() {
         this.setState({ isFetching: true });
 
-        await fetch(`http://localhost:8000/api/pedidos`, {
+        await fetch(`http://localhost:8000/api/pedidos?usuario_username=tinchorin`, {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTkxMTkxNiwiZXhwIjoxNTg5OTE1NTE2LCJuYmYiOjE1ODk5MTE5MTYsImp0aSI6IkVNTHFCUGhiWTFjVkNmQjciLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.nT1a_QuGhwsF_Hrb7ec-jEvTePujelMzjoo_CAQGz6A'
+                'Authorization': 'Bearer ' + this.state.token
             },
         }).then(res => res.json())
-            .then(json => this.setState({ pedidos: json }));
+            .then(json =>
+                this.setState({
+                    pedidos: json,
+                }))
     };
 
     render() {
         let pedidos = this.state.pedidos.map(pedidos => {
             let pedidoData = { ...pedidos };
-            return <Pedidos data={pedidoData} key={pedidos.id} onRouteChange={this.props.onRouteChange} />;
+            return <Pedidos data={pedidoData} cambiarEstado={this.cambiarEstado} key={pedidos.id} onRouteChange={this.props.onRouteChange} />;
         })
         // if (productos.length === 0) {
         //     return (
