@@ -36,8 +36,7 @@ class Pedidos extends React.Component {
                         <td style={style}>{this.props.data.id}</td>
                         <td style={style}>{this.props.data.usuario_username}</td>
                         <td style={style}>
-                            <select>
-                                <option>{this.props.data.estado}</option>
+                            <select value= {this.props.data.estado} >
                                 <option>Confirmado</option>
                                 <option>Pago</option>
                                 <option>Entregado</option>
