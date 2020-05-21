@@ -23,7 +23,7 @@ class Pedidos extends React.Component {
             borderColor: "black"
         }
         return (
-            <table class="table table-bordered table-sm" style={style}>
+            <table className="table table-bordered table-sm" style={style}>
                 <thead>
                     <tr className="table-light">
                         <th scope="col" style={style}>Id</th>

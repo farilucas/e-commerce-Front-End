@@ -4,7 +4,7 @@ import Panel from './components/Panel/Panel';
 import PanelAdmin from './components/Panel/PanelAdmin';
 import Alta from './components/Alta/Alta';
 import Carrito from './components/Lista Productos/Carrito/Carrito';
-import MisPedidosAdmin from './components/Lista Productos/MisProductos/MisPedidosAdmin';
+import MisPedidos from './components/Lista Productos/MisProductos/MisPedidos';
 import Modificar from './components/Modificar/Modificar';
 import Navigation from './components/Navigation/Navigation';
 import Register from './components/Register/Register';
@@ -134,7 +134,7 @@ class App extends React.Component {
       case 'MisPedidos':
         currentComponent = (
           <div>
-            <MisPedidosAdmin loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
+            <MisPedidos loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
           </div>
         );
         break;

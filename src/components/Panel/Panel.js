@@ -73,10 +73,10 @@ class Panel extends React.Component{
             );
         }
         
-        let usuarios = this.state.usuarios.map(usuario => {
-            let userData = { ...usuario }
-            return userData;
-        })
+        // let usuarios = this.state.usuarios.map(usuario => {
+        //     let userData = { ...usuario }
+        //     return userData;
+        // })
         
         let productos = this.state.productos.map(producto => {
             let productData = { ...producto };
