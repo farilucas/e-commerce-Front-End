@@ -8,7 +8,7 @@ class MisPedidos extends React.Component {
         super(props);
         this.state = {
             pedidos: [],
-            token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU5MDAyMjM1MSwiZXhwIjoxNTkwMDI1OTUxLCJuYmYiOjE1OTAwMjIzNTEsImp0aSI6InpFV043cm5pQWcxMks2RkoiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.O-Uy11c7U0PQLE2zMv1kxC-GLCxuprIKXTT35V29yD4'
+            token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU5MDAyNTc1NywiZXhwIjoxNTkwMDI5MzU3LCJuYmYiOjE1OTAwMjU3NTcsImp0aSI6Ik16QUh2WjA5NnZvZTllSXoiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.WZv4VQ8y8eK8DK4qWHHHBhc-00YQiDSLAXYEM1UAHLs'
         }
     }
 
@@ -33,7 +33,7 @@ class MisPedidos extends React.Component {
     async fetchData() {
         this.setState({ isFetching: true });
 
-        await fetch(`http://localhost:8000/api/usuarios/tinchorin/carrito`, {
+        await fetch(`http://localhost:8000/api/pedidos?`+ 'usuario_username=tinchorin', {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
