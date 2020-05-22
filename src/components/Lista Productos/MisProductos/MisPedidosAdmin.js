@@ -9,7 +9,6 @@ class MisPedidosAdmin extends React.Component {
         this.state = {
             pedidos: [],
             estado: '',
-            token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU5MDE1MjE1MiwiZXhwIjoxNTkwMTU1NzUyLCJuYmYiOjE1OTAxNTIxNTIsImp0aSI6Im1HMlh6eWFDR3J2RHZwRVQiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.sW6z4dnuHvYKq3qDW0IGTX0dAFiP89BqMPvHjjzKb1E'
         }
         this.cambiarEstado = this.cambiarEstado.bind(this);
     }
@@ -23,7 +22,7 @@ class MisPedidosAdmin extends React.Component {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.state.token,
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify(
                 this.state
@@ -38,7 +37,7 @@ class MisPedidosAdmin extends React.Component {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
-                'Authorization': 'Bearer ' + this.state.token
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
         }).then(res => res.json())
             .then(json =>

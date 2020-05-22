@@ -6,7 +6,6 @@ class SignIn extends React.Component{
         this.state = {
             username: '',
             password: '',
-            token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTcyNDE1NCwiZXhwIjoxNTg5NzI3NzU0LCJuYmYiOjE1ODk3MjQxNTQsImp0aSI6IkNvalh3ekZ2dnJYYzR4ZUUiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.ilro50UFbE3lFR1x098OCLTvgMot7-_grefswmhfUqY'
         }
     }
     onNombreChange = (event) =>{
@@ -17,26 +16,24 @@ class SignIn extends React.Component{
     }
 
    
-    async onSubmitSignIn = (event) => {
+    onSubmitSignIn = async (event) => {
         event.preventDefault();
-        fetch('http://localhost:8000/api/login', {
+
+        let tokenData = await (await fetch('http://localhost:8000/api/login', {
             method: 'POST',
             headers: {
+                "Access-Control-Allow-Origin": "*",
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 username: this.state.username,
                 password: this.state.password,
             })
-        })
-            .then(response => response.json())
-            .then(user => {
-                if (user.token) {
-                    alert(user.token);
-                    user.username = this.state.username;
-                    this.props.onRouteChange('Inicio');
-                }
-            })
+        })).json();
+
+        localStorage.setItem('token', tokenData.token);
+
+        this.props.onRouteChange('Inicio');
     }
 
     render() {

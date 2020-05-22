@@ -51,7 +51,7 @@ class Pedidos extends React.Component {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU5MDEwODQ1NywiZXhwIjoxNTkwMTEyMDU3LCJuYmYiOjE1OTAxMDg0NTcsImp0aSI6IlIxSm9kS3J1bWNiMmxTWWkiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.ksR5_esuEEF8lPfNflLNItXDEK2Ke5weLJYEZJDUk10'
+                'Authorization':`Bearer ${localStorage.getItem('token')}`
             },
         })
     }
