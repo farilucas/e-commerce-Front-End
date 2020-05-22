@@ -38,8 +38,8 @@ class Pedidos extends React.Component {
         this.setState({ open: false });
     }
 
-    onBaja(e) {
-        this.props.onBaja(e, productos.id);
+    onBaja(e, id) {
+        this.props.onBaja(e, id);
     }
 
     cambiarEstado(){
@@ -67,7 +67,7 @@ class Pedidos extends React.Component {
                         <tr className="table-light">
                             <th scope="col" style={style}>Nombre</th>
                             <th scope="col" style={style}>Cantidad</th>
-                            <th scope="col" style={style}><Button color={"danger"} className="center" size={"sm"} onClick={this.onBaja}><FontAwesomeIcon icon={faTrash} /></Button></th>
+                            <th scope="col" style={style}><Button color={"danger"} className="center" size={"sm"} onClick={(e) => this.onBaja(e, producto.id)}><FontAwesomeIcon icon={faTrash} /></Button></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -122,7 +122,7 @@ class Pedidos extends React.Component {
                                 <ModalBody>
                                     <h4>Opciones</h4>
                                     <p>
-                                        <Button size={"sm"} className={"ml-auto mr-2"} onClick={this.onBaja}><FontAwesomeIcon icon={faPlus} /></Button>
+                                        <Button size={"sm"} className={"ml-auto mr-2"}><FontAwesomeIcon icon={faPlus} /></Button>
                                     </p>
                                     <ul>
                                         <div>

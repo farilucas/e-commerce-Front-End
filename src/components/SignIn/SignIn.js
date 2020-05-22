@@ -16,12 +16,12 @@ class SignIn extends React.Component{
         this.setState({password: event.target.value });
     }
 
-    onSubmitSignIn = (event) => {
+   
+    async onSubmitSignIn = (event) => {
         event.preventDefault();
         fetch('http://localhost:8000/api/login', {
             method: 'POST',
             headers: {
-                "Access-Control-Allow-Origin": "*",
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
