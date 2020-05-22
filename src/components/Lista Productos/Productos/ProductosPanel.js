@@ -57,56 +57,71 @@ class ProductosPanel extends React.Component {
         if(this.props.esAdmin === true){
             return (
                 <Container className="table table-bordered table-sm table-light" style={style}>
-                    <div className={"d-flex align-items-center"}>
-                        {this.props.data.id}
-                        <Button onClick={this.onModificar} className={"ml-auto mr-2"} variant={"primary"} size={"sm"}><FontAwesomeIcon icon={faCog} /></Button>
-                        <Button variant={"danger"} size={"sm"} onClick={this.onBaja}><FontAwesomeIcon icon={faTrash} /></Button>
-                    </div>
-                    <table className="table table-sm">
-                        <thead>
-                            <Row className="table-light">
-                                <Col className="border" style={style}><b>Nombre</b></Col>
-                                <Col className="border" style={style}><b>Descripcion</b></Col>
-                                <Col className="border" style={style}><b>Precio</b></Col>
-                            </Row>
-                        </thead>
-                        <tbody>
-                            <Row className="table-light">
-                                <Col className="border" style={style}>{this.props.data.nombre}</Col>
-                                <Col className="border" style={style}>{this.props.data.descripcion}</Col>
-                                <Col className="border" style={style}>${this.props.data.precio}</Col>
-                            </Row>
-                            <Row className="table-light">
-                                <Col colSpan="4"><button onClick={this.onDetalles} className="b pv2 input-reset mt3 ba b--black hover-bg-lightest-blue pointer w-100">Ver Detalles</button></Col>
-                            </Row>
-                        </tbody>
-                    </table>
+                    <Row>
+                        <Col>
+                            <div className={"d-flex align-items-center py-1"}>
+                                {this.props.data.id}
+                                <Button onClick={this.onModificar} className={"ml-auto mr-2"} variant={"primary"} size={"sm"}><FontAwesomeIcon icon={faCog} /></Button>
+                                <Button variant={"danger"} size={"sm"} onClick={this.onBaja}><FontAwesomeIcon icon={faTrash} /></Button>
+                            </div>
+                            <table className="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <td className="border" style={style}><b>Nombre</b></td>
+                                        <td className="border" style={style}><b>Descripcion</b></td>
+                                        <td className="border" style={style}><b>Precio</b></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr className="border">
+                                        <td className="border" style={style}>{this.props.data.nombre}</td>
+                                        <td className="border" style={style}>{this.props.data.descripcion}</td>
+                                        <td className="border" style={style}>${this.props.data.precio}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan="3" className="border" style={style}>
+                                            <button onClick={this.onDetalles} className="b pv2 input-reset mt3 ba b--black hover-bg-lightest-blue pointer w-100">Ver Detalles</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </Col>
+                    </Row>
                 </Container>
             );
         }
         else{
             return(
-                <Container>
-                    <table className="table table-sm">
-                        <thead>
-                            <Row className="table-light">
-                                <Col className="border" style={style}><b>Nombre</b></Col>
-                                <Col className="border" style={style}><b>Descripcion</b></Col>
-                                <Col className="border" style={style}><b>Precio</b></Col>
-                            </Row>
-                        </thead>
-                        <tbody>
-                            <Row className="table-light">
-                                <Col className="border" style={style}>{this.props.data.nombre}</Col>
-                                <Col className="border" style={style}>{this.props.data.descripcion}</Col>
-                                <Col className="border" style={style}>${this.props.data.precio}</Col>
-                            </Row>
-                            <Row className="table-light">
-                                <Col colSpan="4"><button onClick={this.agregarAlCarrito} className="b pv2 input-reset mt3 ba b--black hover-bg-lightest-blue pointer w-100">Agregar al Carrito!</button></Col>
-                                <Col colSpan="4"><button onClick={this.onDetalles} className="b pv2 input-reset mt3 ba b--black hover-bg-lightest-blue pointer w-100">Ver Detalles</button></Col>
-                            </Row>
-                        </tbody>
-                    </table>
+                <Container className="table table-bordered table-sm table-light" style={style}>
+                    <Row>
+                        <Col>
+                            <table className="table table-sm">
+                                <thead>
+                                <tr>
+                                    <td className="border" style={style}><b>Nombre</b></td>
+                                    <td className="border" style={style}><b>Descripcion</b></td>
+                                    <td className="border" style={style}><b>Precio</b></td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr className="border">
+                                    <td className="border" style={style}>{this.props.data.nombre}</td>
+                                    <td className="border" style={style}>{this.props.data.descripcion}</td>
+                                    <td className="border" style={style}>${this.props.data.precio}</td>
+                                </tr>
+                                <tr className="border" style={style}>
+                                    <td colSpan="3">
+                                        <div className={'d-flex'}>
+                                            <button onClick={this.agregarAlCarrito} className="b mr-3 pv2 input-reset mt3 ba b--black hover-bg-lightest-blue pointer w-100">Agregar al Carrito!</button>
+                                            <button onClick={this.onDetalles} className="b ml-3 pv2 input-reset mt3 ba b--black hover-bg-lightest-blue pointer w-100">Ver Detalles</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </Col>
+                    </Row>
+
                 </Container >
             );
         }

@@ -21,15 +21,24 @@ class PanelAdmin extends React.Component {
 
     async fetchData() {
         this.setState({ isFetching: true });
-        await fetch(`http://localhost:8000/api/productos`, {
+
+        let response = await fetch(`http://localhost:8000/api/productos`, {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                "Accept": "application/json"
             },
-        }).then(res => res.json())
-            .then(json => this.setState({ productos: json }));
-    };
+        });
+
+        if(response.status !== 200 && response.status !== 204) {
+            return;
+        }
+
+        response = await response.json();
+
+        this.setState({ productos: response });
+    }
 
     async onBaja(event, id) {
         event.preventDefault();
@@ -59,11 +68,13 @@ class PanelAdmin extends React.Component {
                 </article>
             );
         }
+
         let productos = this.state.productos.map(producto => {
             let productData = { ...producto };
 
             return <ProductosPanel esAdmin={this.state.admin} data={productData} key={producto.id} onBaja={this.onBaja.bind(this)} onRouteChange={this.props.onRouteChange} />;
-        })
+        });
+
         return (
             <div className="flex flex-column">
                 <button className={"b ph3 pv2 input-reset ba b--black bg-transparent fr pointer w-20 self-end"} style={{ justifyContent: 'flex-end' }} onClick={() => this.props.onRouteChange('Alta')} >Dar de alta un producto</button>

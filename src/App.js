@@ -85,6 +85,7 @@ class App extends React.Component {
   onRouteChange = (route, producto) => {
     if (route === 'SignOut') {
       this.setState(inicialState);
+      localStorage.clear();
     } else if (route === 'Alta') {
       this.setState({ pagina: 'alta', route });
     } else if (route === 'Inicio') {

@@ -12,14 +12,38 @@ class Pedidos extends React.Component {
         this.state = {
             open: false,
             productos: [],
-        }
+            todosProductos: [],
+            selectedProducto: 1
+        };
+
         this.onBaja = this.onBaja.bind(this);
         this.cambiarEstado = this.cambiarEstado.bind(this);
         this.toggleModalOn = this.toggleModalOn.bind(this);
         this.toggleModalOff = this.toggleModalOff.bind(this);
         this.cambiarCantidad = this.cambiarCantidad.bind(this);   
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.onSelectChange = this.onSelectChange.bind(this);
+        this.onSubmitProducto = this.onSubmitProducto.bind(this);
     }
+
+    componentDidMount() {
+        this.fetchProductos();
+    }
+
+    async fetchProductos() {
+        let json = await fetch(`http://localhost:8000/api/productos`, {
+            method: "get",
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                "Accept": "application/json"
+            },
+        }).then(res => res.json());
+
+        console.log("Productosd");
+        console.log(json);
+        this.setState({todosProductos: json});
+    };
 
     handleInputChange(event) {
         const target = event.target;
@@ -33,33 +57,35 @@ class Pedidos extends React.Component {
 
     toggleModalOn(){
         this.setState({open: true});
+        this.fetchProductos();
     }
 
     toggleModalOff() {
         this.setState({ open: false });
     }
 
-    onBaja(e, id) {
-        this.props.onBaja(e, id);
+    onBaja(id) {
+        this.props.onBaja(id);
     }
 
     cambiarEstado(){
         this.props.cambiarEstado(this.props.data.id);
     }
 
-    onSubmitAlta(event) {
+    onSubmitProducto(event) {
         event.preventDefault();
-        fetch('http://localhost:8000/api/pedidos/1/producto', {
+
+        console.log("Creando producto");
+        fetch('http://localhost:8000/api/pedidos/1/productos', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
-            body: JSON.stringify(
-                this.state
-            )
-        })
-        .then(() => this.props.onRouteChange('Inicio'));
+            body: JSON.stringify({
+                id: this.state.selectedProducto
+            })
+        });
     }
 
     cambiarCantidad() {
@@ -70,6 +96,10 @@ class Pedidos extends React.Component {
                 'Authorization':`Bearer ${localStorage.getItem('token')}`
             },
         })
+    }
+
+    onSelectChange(e) {
+        this.setState({selectedProducto: e.target.value})
     }
 
     render() {
@@ -83,19 +113,21 @@ class Pedidos extends React.Component {
                         <tr className="table-light">
                             <th scope="col" style={style}>Nombre</th>
                             <th scope="col" style={style}>Cantidad</th>
-                            <th scope="col" style={style}><Button color={"danger"} className="center" size={"sm"} onClick={(e) => this.onBaja(e, producto.id)}><FontAwesomeIcon icon={faTrash} /></Button></th>
+                            <th scope="col" style={style}><Button color={"danger"} className="center" size={"sm"} onClick={() => this.onBaja(producto.id)}><FontAwesomeIcon icon={faTrash} /></Button></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr className="table-light">
                             <td style={style}>{producto.nombre}</td>
-                            <td style={style}><input type="number" pattern="[0-9]" onChange={this.handleInputChange} name="cantidad" id="cantidad" placeholder={producto.cantidad}></input></td>
+                            <td style={style}><input type="number" pattern="[0-9]" onChange={this.handleInputChange} name="cantidad" id="cantidad" placeholder={producto.cantidad}/></td>
                             <td style={style}><Button onClick={this.cambiarCantidad} value={producto.cantidad} color={"success"} className="center" size={"sm"}><FontAwesomeIcon icon={faCheckSquare} /></Button></td>
                         </tr>
                     </tbody>
                 </table>
             );
         });
+
+        let options = this.state.todosProductos.map(producto => <option value={producto.id}>{producto.nombre}</option>);
         return (
             <table className="table table-bordered table-sm" style={style}>
                 <thead>
@@ -138,9 +170,10 @@ class Pedidos extends React.Component {
                                 <ModalBody>
                                     <h4>Opciones</h4>
                                     <p>
-                                        <select>
-                                            <option>Ahoi</option>    
-                                        </select><Button size={"sm"} className={"ml-auto mr-2"} onClick={this.onSubmitAlta}><FontAwesomeIcon icon={faPlus} /></Button>
+                                        <select onChange={this.onSelectChange} value={this.state.selectedProducto}>
+                                            {options}
+                                        </select>
+                                        <Button size={"sm"} className={"ml-auto mr-2"} onClick={this.onSubmitProducto}><FontAwesomeIcon icon={faPlus} /></Button>
                                     </p>
                                     <ul>
                                         <div>
