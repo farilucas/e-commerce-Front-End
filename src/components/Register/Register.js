@@ -47,14 +47,13 @@ class Register extends React.Component{
 
 
     onSubmitRegister(event) {
-        let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTgwOTgwOSwiZXhwIjoxNTg5ODEzNDA5LCJuYmYiOjE1ODk4MDk4MDksImp0aSI6ImRwZjdTQTd1SGdZZ1p3OWoiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.CrAStULj39h-Xa_NWKwsexfEyPyuuQb9Lq3f6nwGCyU";
         event.preventDefault();
         fetch('http://localhost:8000/api/usuarios', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
                 "Access-Control-Allow-Origin": "*",
-                'Authorization': 'Bearer ' + token
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify(
                 this.state,

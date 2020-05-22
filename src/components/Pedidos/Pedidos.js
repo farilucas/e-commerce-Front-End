@@ -1,5 +1,6 @@
 import React from "react";
 import { Modal, Button, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import ProductosPanel from '../Lista Productos/Productos/ProductosPanel';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
 import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
@@ -12,11 +13,11 @@ class Pedidos extends React.Component {
             open: false,
             productos: [],
         }
+        this.onBaja = this.onBaja.bind(this);
         this.cambiarEstado = this.cambiarEstado.bind(this);
         this.toggleModalOn = this.toggleModalOn.bind(this);
         this.toggleModalOff = this.toggleModalOff.bind(this);
-        this.cambiarCantidad = this.cambiarCantidad.bind(this);
-        this.onBaja = this.onBaja.bind(this);
+        this.cambiarCantidad = this.cambiarCantidad.bind(this);   
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
@@ -44,6 +45,21 @@ class Pedidos extends React.Component {
 
     cambiarEstado(){
         this.props.cambiarEstado(this.props.data.id);
+    }
+
+    onSubmitAlta(event) {
+        event.preventDefault();
+        fetch('http://localhost:8000/api/pedidos/1/producto', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify(
+                this.state
+            )
+        })
+        .then(() => this.props.onRouteChange('Inicio'));
     }
 
     cambiarCantidad() {
@@ -122,7 +138,9 @@ class Pedidos extends React.Component {
                                 <ModalBody>
                                     <h4>Opciones</h4>
                                     <p>
-                                        <Button size={"sm"} className={"ml-auto mr-2"}><FontAwesomeIcon icon={faPlus} /></Button>
+                                        <select>
+                                            <option>Ahoi</option>    
+                                        </select><Button size={"sm"} className={"ml-auto mr-2"} onClick={this.onSubmitAlta}><FontAwesomeIcon icon={faPlus} /></Button>
                                     </p>
                                     <ul>
                                         <div>
@@ -134,15 +152,10 @@ class Pedidos extends React.Component {
                                     <Button onClick={this.toggleModalOff}>Close</Button>
                                 </ModalFooter>
                             </Modal>
-                            {/* <VerDetalles
-                                show={modalShow}
-                                onHide={() => setModalShow(false)}
-                            /> */}
                         </td>
                     </tr>
                 </tbody>
             </table>
-            //</div>
         );
     }
 }

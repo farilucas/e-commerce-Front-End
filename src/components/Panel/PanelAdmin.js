@@ -8,7 +8,6 @@ class PanelAdmin extends React.Component {
             productos: [],
             admin: true,
             categoria: 'Todos',
-            token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTk4MzU4NSwiZXhwIjoxNTg5OTg3MTg1LCJuYmYiOjE1ODk5ODM1ODUsImp0aSI6IkloQVhQNWJCOUJjbm1CR00iLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.8NQOSK7fvvWadLHq9RMyV0Z3A1pTYl43OSeN317dO0o',
         }
     }
 
@@ -26,7 +25,7 @@ class PanelAdmin extends React.Component {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
-                'Authorization': 'Bearer ' + this.state.token,
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
         }).then(res => res.json())
             .then(json => this.setState({ productos: json }));
@@ -37,7 +36,7 @@ class PanelAdmin extends React.Component {
         await fetch('http://localhost:8000/api/productos/' + id, {
             method: 'delete',
             headers: {
-                'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.state.token,},
+                'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}`},
         });
 
         this.fetchData();
@@ -65,7 +64,6 @@ class PanelAdmin extends React.Component {
 
             return <ProductosPanel esAdmin={this.state.admin} data={productData} key={producto.id} onBaja={this.onBaja.bind(this)} onRouteChange={this.props.onRouteChange} />;
         })
-
         return (
             <div className="flex flex-column">
                 <button className={"b ph3 pv2 input-reset ba b--black bg-transparent fr pointer w-20 self-end"} style={{ justifyContent: 'flex-end' }} onClick={() => this.props.onRouteChange('Alta')} >Dar de alta un producto</button>

@@ -10,9 +10,6 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
 class ProductosPanel extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTk4MzU4NSwiZXhwIjoxNTg5OTg3MTg1LCJuYmYiOjE1ODk5ODM1ODUsImp0aSI6IkloQVhQNWJCOUJjbm1CR00iLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.8NQOSK7fvvWadLHq9RMyV0Z3A1pTYl43OSeN317dO0o'
-        }
         this.onModificar = this.onModificar.bind(this);
         this.onBaja = this.onBaja.bind(this);
         this.agregarAlCarrito = this.agregarAlCarrito.bind(this);
@@ -37,7 +34,7 @@ class ProductosPanel extends React.Component {
             method: 'post',
             headers: {
                 "Content-Type": "application/json",
-                'Authorization': 'Bearer ' + this.state.token,
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify(
                 [{

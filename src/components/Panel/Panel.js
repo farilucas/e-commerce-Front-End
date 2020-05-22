@@ -8,7 +8,6 @@ class Panel extends React.Component{
             productos: [],
             usuarios: [],
             categoria: 'Todos',
-            token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTk4MzU4NSwiZXhwIjoxNTg5OTg3MTg1LCJuYmYiOjE1ODk5ODM1ODUsImp0aSI6IkloQVhQNWJCOUJjbm1CR00iLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.8NQOSK7fvvWadLHq9RMyV0Z3A1pTYl43OSeN317dO0o'
         }
     }
 
@@ -26,7 +25,7 @@ class Panel extends React.Component{
             method: "get",
             headers: { 
                 "Content-Type": "application/json",
-                'Authorization': 'Bearer ' + this.state.token,
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
         }).then(res => res.json())
         .then(json => this.setState({productos: json}));
@@ -38,6 +37,7 @@ class Panel extends React.Component{
             method: 'delete',
             headers: { 
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
         });
     }
@@ -72,11 +72,6 @@ class Panel extends React.Component{
                 </article>
             );
         }
-        
-        // let usuarios = this.state.usuarios.map(usuario => {
-        //     let userData = { ...usuario }
-        //     return userData;
-        // })
         
         let productos = this.state.productos.map(producto => {
             let productData = { ...producto };

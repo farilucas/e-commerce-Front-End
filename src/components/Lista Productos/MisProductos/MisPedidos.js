@@ -8,7 +8,6 @@ class MisPedidos extends React.Component {
         super(props);
         this.state = {
             pedidos: [],
-            token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU5MDA2MTIzMCwiZXhwIjoxNTkwMDY0ODMwLCJuYmYiOjE1OTAwNjEyMzAsImp0aSI6IkpRZ3I1UW5EUW5yTXM4ekgiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.QS4BbhqOtftimCS7RgfwWuvfLIQbiWroxYOxz4aIeaQ'
         }
     }
 
@@ -23,7 +22,7 @@ class MisPedidos extends React.Component {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
-                'Authorization': 'Bearer ' + this.state.token
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
         }).then(res => res.json())
             .then(json =>
