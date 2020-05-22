@@ -9,7 +9,7 @@ class MisPedidosAdmin extends React.Component {
         this.state = {
             pedidos: [],
             estado: '',
-            token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU5MDA3OTA4MiwiZXhwIjoxNTkwMDgyNjgyLCJuYmYiOjE1OTAwNzkwODIsImp0aSI6Ik1KbFZFRmZ3N2I0TFQ1SmYiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.iFxFNFtpK-UPgsL-vih7svsJusuvbUDPeRkHmyvpBec'
+            token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU5MDEwODQ1NywiZXhwIjoxNTkwMTEyMDU3LCJuYmYiOjE1OTAxMDg0NTcsImp0aSI6IlIxSm9kS3J1bWNiMmxTWWkiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.ksR5_esuEEF8lPfNflLNItXDEK2Ke5weLJYEZJDUk10'
         }
         this.cambiarEstado = this.cambiarEstado.bind(this);
     }
@@ -47,10 +47,22 @@ class MisPedidosAdmin extends React.Component {
                 }))
     };
 
+    async onBaja(event, id) {
+        event.preventDefault();
+        await fetch(`http://localhost:8000/api/pedidos/1/productos/` + id, {
+            method: 'delete',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU5MDEwODQ1NywiZXhwIjoxNTkwMTEyMDU3LCJuYmYiOjE1OTAxMDg0NTcsImp0aSI6IlIxSm9kS3J1bWNiMmxTWWkiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.ksR5_esuEEF8lPfNflLNItXDEK2Ke5weLJYEZJDUk10'
+            }
+        })
+
+    }
+
     render() {
         let pedidos = this.state.pedidos.map(pedidos => {
             let pedidoData = { ...pedidos };
-            return <Pedidos data={pedidoData} cambiarEstado={this.cambiarEstado} key={pedidos.id} onRouteChange={this.props.onRouteChange} />;
+            return <Pedidos data={pedidoData} onBaja={this.onBaja} cambiarEstado={this.cambiarEstado} key={pedidos.id} onRouteChange={this.props.onRouteChange} />
         })
         // if (productos.length === 0) {
         //     return (
