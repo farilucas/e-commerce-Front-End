@@ -30,7 +30,7 @@ class ProductosPanel extends React.Component {
 
     async agregarAlCarrito(event, id){
         event.preventDefault();
-          await fetch(`http://localhost:8000/api/usuarios/tinchorin/carrito`, {
+          await fetch(`http://localhost:8000/api/usuarios/carrito`, {
             method: 'post',
             headers: {
                 "Content-Type": "application/json",

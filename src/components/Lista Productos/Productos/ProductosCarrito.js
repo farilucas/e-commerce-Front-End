@@ -39,7 +39,7 @@ class Productos extends React.Component{
     }
 
     cambiarCantidad() {
-        fetch(`http://localhost:8000/api/usuarios/tinchorin/carrito`, {
+        fetch(`http://localhost:8000/api/usuarios/carrito`, {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json',
@@ -63,22 +63,6 @@ class Productos extends React.Component{
             borderColor: "black"        
         }
         return(
-            // <Card bg={"white"}>
-            //     <Card.Body>
-            //         <Container>
-            //             <Row className={"table table-bordered"}>
-            //                 <Col><p className="h3 table table-bordered">Nombre: </p><br/><p className="h3">{this.props.data.nombre}</p></Col>
-            //                 <Col><Field label={"Descripcion"}>{this.props.data.descripcion}</Field></Col>
-            //                 <Col><Field label={"Precio"}>{this.props.data.precio}</Field></Col>
-            //                 <Col><Field label={"Cantidad"}>{this.props.data.cantidad}</Field></Col>
-            //             </Row>
-            //         </Container>
-            //     </Card.Body>
-            //     <Card.Footer className={"d-flex"}>
-            //         <Button onClick={this.onDetalles} className="pa2 w-100">Ver Detalles</Button>
-            //     </Card.Footer>
-            // </Card>
-            
             <table className="table table-bordered table-sm" style={style}>
                 <thead>
                     <tr className="table-light">

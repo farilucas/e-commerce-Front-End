@@ -18,7 +18,7 @@ class MisPedidos extends React.Component {
     async fetchData() {
         this.setState({ isFetching: true });
 
-        await fetch(`http://localhost:8000/api/pedidos?usuario_username=tinchorin`, {
+        await fetch(`http://localhost:8000/api/pedidos`, {
             method: "get",
             headers: {
                 "Content-Type": "application/json",

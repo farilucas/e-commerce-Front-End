@@ -39,9 +39,6 @@ class Pedidos extends React.Component {
                 "Accept": "application/json"
             },
         }).then(res => res.json());
-
-        console.log("Productosd");
-        console.log(json);
         this.setState({todosProductos: json});
     };
 
@@ -74,22 +71,21 @@ class Pedidos extends React.Component {
 
     onSubmitProducto(event) {
         event.preventDefault();
-
-        console.log("Creando producto");
-        fetch('http://localhost:8000/api/pedidos/1/productos', {
+        fetch(`http://localhost:8000/api/pedidos/${this.props.pedidos.id}/productos`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                'Accept': 'application/json'
             },
             body: JSON.stringify({
                 id: this.state.selectedProducto
             })
-        });
+        }).catch((e) => console.log(e));
     }
 
     cambiarCantidad() {
-        fetch(`http://localhost:8000/api/pedidos/1/productos/3?cantidad=15`, {
+        fetch(`http://localhost:8000/api/pedidos/${this.props.pedidos.id}/productos/${this.state.productos.id}?cantidad=${this.state.productos.cantidad}`, {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json',

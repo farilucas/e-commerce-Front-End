@@ -39,7 +39,7 @@ const inicialState = {
   user: {
     username: '',
     token: '',
-    admin: true
+    admin: false
   },
   productos: {
     id: '',

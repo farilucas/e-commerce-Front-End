@@ -12,7 +12,7 @@ class Register extends React.Component{
             direccion: '',
             telefono: '',
             token: '',
-            admin: 0
+            admin: false
         }
         this.onUsernameChange = this.onUsernameChange.bind(this);
         this.onPasswordChange = this.onPasswordChange.bind(this);

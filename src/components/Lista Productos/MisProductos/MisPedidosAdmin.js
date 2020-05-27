@@ -19,7 +19,7 @@ class MisPedidosAdmin extends React.Component {
     }
 
     cambiarEstado(){
-        fetch("http://localhost:8000/api/pedidos/1?estado=pago", {
+        fetch(`http://localhost:8000/api/pedidos/${this.state.pedidos.id}?estado=${this.state.estado}`, {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ class MisPedidosAdmin extends React.Component {
     async fetchData() {
         this.setState({ isFetching: true });
 
-        await fetch(`http://localhost:8000/api/pedidos?usuario_username=tinchorin`, {
+        await fetch(`http://localhost:8000/api/pedidos`, {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
@@ -48,7 +48,7 @@ class MisPedidosAdmin extends React.Component {
     };
 
     async onBaja(id) {
-        await fetch(`http://localhost:8000/api/pedidos/1/productos/` + id, {
+        await fetch(`http://localhost:8000/api/pedidos/${this.state.pedidos.id}/productos/` + id, {
             method: 'delete',
             headers: {
                 'Content-Type': 'application/json',
@@ -64,7 +64,6 @@ class MisPedidosAdmin extends React.Component {
             let pedidoData = { ...pedidos };
             return <Pedidos data={pedidoData} onBaja={this.onBaja} cambiarEstado={this.cambiarEstado} key={pedidos.id} onRouteChange={this.props.onRouteChange} />
         })
-        console.log(pedidos);
         if (pedidos.length === 0) {
             return (
                 <article className="br3 ba  b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
