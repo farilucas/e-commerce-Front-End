@@ -10,6 +10,9 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";
 class ProductosPanel extends React.Component {
     constructor(props) {
         super(props);
+        this.state ={
+            cantidad: 0
+        }
         this.onModificar = this.onModificar.bind(this);
         this.onBaja = this.onBaja.bind(this);
         this.agregarAlCarrito = this.agregarAlCarrito.bind(this);

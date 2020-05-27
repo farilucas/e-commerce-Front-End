@@ -15,12 +15,11 @@ class PanelAdmin extends React.Component {
 
     async fetchData() {
         this.setState({ isFetching: true });
-        let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTgxMTczMiwiZXhwIjoxNTg5ODE1MzMyLCJuYmYiOjE1ODk4MTE3MzIsImp0aSI6IlpyMjY5Y0xhREtQbEo4OFoiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.xXCh624y5027YwnXxBt31AGNiPRGLYaf-chTtUNaGWo'
-        await fetch(`http://localhost:8000/api/pedido_producto`, {
+       await fetch(`http://localhost:8000/api/pedido_producto`, {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
-                'Authorization': 'Bearer ' + token,
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
             },
         }).then(res => res.json())
             .then(json => this.setState({ productos: json }));
@@ -28,11 +27,10 @@ class PanelAdmin extends React.Component {
 
     async onBaja(event, id) {
         event.preventDefault();
-        let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTU4OTgxMTczMiwiZXhwIjoxNTg5ODE1MzMyLCJuYmYiOjE1ODk4MTE3MzIsImp0aSI6IlpyMjY5Y0xhREtQbEo4OFoiLCJzdWIiOiJ0aW5jaG9yaW4iLCJwcnYiOiIwYjBjZjUwYWYxMjNkODUwNmUxNmViYTdjYjY3NjI5NzRkYTNhYzNhIn0.xXCh624y5027YwnXxBt31AGNiPRGLYaf-chTtUNaGWo'
         await fetch('http://localhost:8000/api/pedido_producto/' + id, {
             method: 'delete',
             headers: {
-                'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}`,
             },
         });
 

@@ -1,6 +1,5 @@
 import React from "react";
 import { Modal, Button, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import ProductosPanel from '../Lista Productos/Productos/ProductosPanel';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
 import { faTrash } from "@fortawesome/free-solid-svg-icons/faTrash";

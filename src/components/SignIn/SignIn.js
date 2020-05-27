@@ -19,7 +19,7 @@ class SignIn extends React.Component{
     onSubmitSignIn = async (event) => {
         event.preventDefault();
 
-        let tokenData = await (await fetch('http://localhost:8000/api/login', {
+        let data = await (await fetch('http://localhost:8000/api/login', {
             method: 'POST',
             headers: {
                 "Access-Control-Allow-Origin": "*",
@@ -31,8 +31,9 @@ class SignIn extends React.Component{
             })
         })).json();
 
-        localStorage.setItem('token', tokenData.token);
-
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('username', this.state.username);
+        alert(`${localStorage.getItem('username')}`)
         this.props.onRouteChange('Inicio');
     }
 
