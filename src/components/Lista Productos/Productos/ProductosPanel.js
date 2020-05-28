@@ -11,7 +11,7 @@ class ProductosPanel extends React.Component {
     constructor(props) {
         super(props);
         this.state ={
-            cantidad: 0
+            cantidad: 1
         }
         this.onModificar = this.onModificar.bind(this);
         this.onBaja = this.onBaja.bind(this);
@@ -33,7 +33,7 @@ class ProductosPanel extends React.Component {
 
     async agregarAlCarrito(event, id){
         event.preventDefault();
-          await fetch(`http://localhost:8000/api/usuarios/carrito`, {
+        let response = await fetch(`http://localhost:8000/api/usuarios/carrito`, {
             method: 'post',
             headers: {
                 "Content-Type": "application/json",
@@ -45,15 +45,21 @@ class ProductosPanel extends React.Component {
                     cantidad: 0
                 }],
                 this.state.cantidad,
-                console.log(this.props.data.id, this.props.data.cantidad)
             )
         }).then(res => res.json())
         .then(json => this.setState({
             producto_id: json, cantidad: 10 
         }))
+
+         if (response.status !== 200 && response.status !== 204) {
+             return alert('Debe registrarse para realizar esta accion.');
+         }
+
     }
 
     render() {
+        console.log(localStorage.getItem('admin'));
+        let boton = localStorage.getItem('token') === null ? "" : <button onClick = {this.agregarAlCarrito} className = "b mr-3 pv2 input-reset mt3 ba b--black hover-bg-lightest-blue pointer w-100" > Agregar al Carrito! </button> 
         const style = {
             borderColor: "black"
         }
@@ -80,11 +86,6 @@ class ProductosPanel extends React.Component {
                                         <td className="border" style={style}>{this.props.data.nombre}</td>
                                         <td className="border" style={style}>{this.props.data.descripcion}</td>
                                         <td className="border" style={style}>${this.props.data.precio}</td>
-                                    </tr>
-                                    <tr>
-                                        <td colSpan="3" className="border" style={style}>
-                                            <button onClick={this.onDetalles} className="b pv2 input-reset mt3 ba b--black hover-bg-lightest-blue pointer w-100">Ver Detalles</button>
-                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -115,8 +116,7 @@ class ProductosPanel extends React.Component {
                                 <tr className="border" style={style}>
                                     <td colSpan="3">
                                         <div className={'d-flex'}>
-                                            <button onClick={this.agregarAlCarrito} className="b mr-3 pv2 input-reset mt3 ba b--black hover-bg-lightest-blue pointer w-100">Agregar al Carrito!</button>
-                                            <button onClick={this.onDetalles} className="b ml-3 pv2 input-reset mt3 ba b--black hover-bg-lightest-blue pointer w-100">Ver Detalles</button>
+                                            {boton}
                                         </div>
                                     </td>
                                 </tr>
@@ -124,7 +124,6 @@ class ProductosPanel extends React.Component {
                             </table>
                         </Col>
                     </Row>
-
                 </Container >
             );
         }

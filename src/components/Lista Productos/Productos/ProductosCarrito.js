@@ -7,7 +7,7 @@ class Productos extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            cantidad: 0
+            cantidad: 1
         }
         this.onModificar = this.onModificar.bind(this);
         this.onBaja = this.onBaja.bind(this);

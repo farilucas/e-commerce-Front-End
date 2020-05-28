@@ -86,6 +86,7 @@ class App extends React.Component {
     if (route === 'SignOut') {
       this.setState(inicialState);
       localStorage.clear();
+      clearTimeout(localStorage.getItem("tokenHandle"));
     } else if (route === 'Alta') {
       this.setState({ pagina: 'alta', route });
     } else if (route === 'Inicio') {
@@ -112,7 +113,8 @@ class App extends React.Component {
       case 'Inicio':
         currentComponent = (
           <div>
-            { this.state.user.admin === false
+            {  
+              localStorage.getItem('admin') === "0"
               ?<Panel isSignedIn={isSignedIn} esAdmin={this.state.user.admin} userId={this.state.user.username}  loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
               :<PanelAdmin isSignedIn={isSignedIn} loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
             }
@@ -136,7 +138,7 @@ class App extends React.Component {
       case 'MisPedidos':
         currentComponent = (
           <div>
-            { this.state.user.admin === false
+            { localStorage.getItem('admin') === 0
               ?<MisPedidos loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
               :<MisPedidosAdmin loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
             }

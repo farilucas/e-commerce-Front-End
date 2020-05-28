@@ -101,6 +101,7 @@ class Pedidos extends React.Component {
         const style = {
             borderColor: "black"
         }
+        let precioFinal;
         let productos = this.props.data.productos.map(producto => {
             return (
                 <table className="table table-bordered table-sm" style={style}>
@@ -159,7 +160,7 @@ class Pedidos extends React.Component {
                                 aria-labelledby="contained-modal-title-vcenter"
                                 centered
                             >
-                                <ModalHeader closeButton>
+                                <ModalHeader closebutton>
                                         Detalles del Pedido
                                 </ModalHeader>
                                 <ModalBody>

@@ -6,6 +6,7 @@ class SignIn extends React.Component{
         this.state = {
             username: '',
             password: '',
+            admin: 0
         }
     }
     onNombreChange = (event) =>{
@@ -19,7 +20,7 @@ class SignIn extends React.Component{
     onSubmitSignIn = async (event) => {
         event.preventDefault();
 
-        let data = await (await fetch('http://localhost:8000/api/login', {
+        let response = await fetch('http://localhost:8000/api/login', {
             method: 'POST',
             headers: {
                 "Access-Control-Allow-Origin": "*",
@@ -29,13 +30,28 @@ class SignIn extends React.Component{
                 username: this.state.username,
                 password: this.state.password,
             })
-        })).json();
+        });
+
+        if (response.status !== 200 && response.status !== 204) {
+            return alert('Contraseña o Username incorrectos!');
+        }
+
+        let data = await response.json();
 
         localStorage.setItem('token', data.token);
+        let refreshTokenHandle = setTimeout(
+            () => {
+                localStorage.clear();
+                window.location.reload(false);
+            },
+            1000 * 3600
+        );
+        localStorage.setItem("tokenHandler", refreshTokenHandle);
         localStorage.setItem('username', this.state.username);
-        alert(`${localStorage.getItem('username')}`)
+        localStorage.setItem('admin', this.state.admin);
         this.props.onRouteChange('Inicio');
     }
+
 
     render() {
         return (
