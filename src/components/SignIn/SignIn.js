@@ -6,7 +6,7 @@ class SignIn extends React.Component{
         this.state = {
             username: '',
             password: '',
-            admin: 0
+            admin: ''
         }
     }
     onNombreChange = (event) =>{
@@ -48,7 +48,7 @@ class SignIn extends React.Component{
         );
         localStorage.setItem("tokenHandler", refreshTokenHandle);
         localStorage.setItem('username', this.state.username);
-        localStorage.setItem('admin', this.state.admin);
+        localStorage.setItem('admin', data.admin);
         this.props.onRouteChange('Inicio');
     }
 

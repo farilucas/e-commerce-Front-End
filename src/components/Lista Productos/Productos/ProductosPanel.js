@@ -58,12 +58,11 @@ class ProductosPanel extends React.Component {
     }
 
     render() {
-        console.log(localStorage.getItem('admin'));
         let boton = localStorage.getItem('token') === null ? "" : <button onClick = {this.agregarAlCarrito} className = "b mr-3 pv2 input-reset mt3 ba b--black hover-bg-lightest-blue pointer w-100" > Agregar al Carrito! </button> 
         const style = {
             borderColor: "black"
         }
-        if(this.props.esAdmin === true){
+        if (localStorage.getItem('admin') === '1'){
             return (
                 <Container className="table table-bordered table-sm table-light" style={style}>
                     <Row>

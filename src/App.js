@@ -107,16 +107,18 @@ class App extends React.Component {
   render(){
     const { isSignedIn, route, pagina} = this.state;
     let currentComponent;
-
+    // if (localStorage.getItem('admin') === null){
+    //   localStorage.setItem('admin')
+    // }
     switch (route) {
       default:
       case 'Inicio':
         currentComponent = (
           <div>
-            {  
-              localStorage.getItem('admin') === "0"
-              ?<Panel isSignedIn={isSignedIn} esAdmin={this.state.user.admin} userId={this.state.user.username}  loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
-              :<PanelAdmin isSignedIn={isSignedIn} loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
+            {
+              localStorage.getItem('admin') === "1" 
+              ?<PanelAdmin isSignedIn={isSignedIn} loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
+              :<Panel isSignedIn={isSignedIn} esAdmin={this.state.user.admin} userId={this.state.user.username} loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
             }
           </div>
         );

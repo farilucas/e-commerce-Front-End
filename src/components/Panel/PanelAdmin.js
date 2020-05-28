@@ -72,7 +72,7 @@ class PanelAdmin extends React.Component {
         let productos = this.state.productos.map(producto => {
             let productData = { ...producto };
 
-            return <ProductosPanel esAdmin={this.state.admin} data={productData} key={producto.id} onBaja={this.onBaja.bind(this)} onRouteChange={this.props.onRouteChange} />;
+            return <ProductosPanel data={productData} key={producto.id} onBaja={this.onBaja.bind(this)} onRouteChange={this.props.onRouteChange} />;
         });
 
         return (
