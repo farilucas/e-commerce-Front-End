@@ -12,11 +12,13 @@ class Pedidos extends React.Component {
             open: false,
             productos: [],
             todosProductos: [],
-            selectedProducto: 1
+            selectedProducto: 1,
+            selectedEstado: 'Confirmado'
         };
 
         this.onBaja = this.onBaja.bind(this);
         this.cambiarEstado = this.cambiarEstado.bind(this);
+        this.onEstadoChange= this.onEstadoChange.bind(this);
         this.toggleModalOn = this.toggleModalOn.bind(this);
         this.toggleModalOff = this.toggleModalOff.bind(this);
         this.cambiarCantidad = this.cambiarCantidad.bind(this);   
@@ -64,8 +66,23 @@ class Pedidos extends React.Component {
         this.props.onBaja(id);
     }
 
-    cambiarEstado(){
-        this.props.cambiarEstado(this.props.data.id);
+    cambiarEstado(e){
+        this.setState({selectedEstado: e.target.value})
+    }
+
+    onEstadoChange(event) {
+        event.preventDefault();
+        fetch(`http://localhost:8000/api/pedidos/${this.props.data.id}`, {
+            method: 'put',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                estado: this.state.selectedEstado
+            })
+        }).catch((e) => console.log(e));
     }
 
     onSubmitProducto(event) {
@@ -98,10 +115,10 @@ class Pedidos extends React.Component {
     }
 
     render() {
+        console.log(this.props.data.id, this.props.data.estado);
         const style = {
             borderColor: "black"
         }
-        let precioFinal;
         let productos = this.props.data.productos.map(producto => {
             return (
                 <table className="table table-bordered table-sm" style={style}>
@@ -138,16 +155,15 @@ class Pedidos extends React.Component {
                         <td style={style}>{this.props.data.id}</td>
                         <td style={style}>{this.props.data.usuario_username}</td>
                         <td style={style}>
-                            <select>
-                                <option>Confirmado</option>
-                                <option>Pago</option>
-                                <option>Entregado</option>
+                            <select value={this.state.selectedEstado} onChange={this.cambiarEstado}>
+                                <option value="pago">pago</option>
+                                <option value="entregado">entregado</option>
                             </select>
                         </td>
                     </tr>
                     <tr className="table-light">
                         <td colSpan="4">
-                            <button onClick={this.cambiarEstado} className="b pv2 input-reset ba b--black bg-transparent pointer f6 dib w-100">Cambiar estado</button>
+                            <button onClick={this.onEstadoChange} className="b pv2 input-reset ba b--black bg-transparent pointer f6 dib w-100">Cambiar estado</button>
                         </td>
                     </tr>
                     <tr className="table-light">

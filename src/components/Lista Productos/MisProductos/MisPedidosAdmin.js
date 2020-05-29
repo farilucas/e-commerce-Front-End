@@ -11,25 +11,12 @@ class MisPedidosAdmin extends React.Component {
             pedidos: [],
             estado: '',
         }
-        this.cambiarEstado = this.cambiarEstado.bind(this);
     }
 
     componentDidMount() {
         this.fetchData()
     }
 
-    cambiarEstado(){
-        fetch(`http://localhost:8000/api/pedidos/${this.state.pedidos.id}?estado=${this.state.estado}`, {
-            method: 'put',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            },
-            body: JSON.stringify(
-                this.state
-            )
-        })
-    }
 
     async fetchData() {
         this.setState({ isFetching: true });
@@ -62,7 +49,7 @@ class MisPedidosAdmin extends React.Component {
     render() {
         let pedidos = this.state.pedidos.map(pedidos => {
             let pedidoData = { ...pedidos };
-            return <Pedidos data={pedidoData} onBaja={this.onBaja} cambiarEstado={this.cambiarEstado} key={pedidos.id} onRouteChange={this.props.onRouteChange} />
+            return <Pedidos data={pedidoData} onBaja={this.onBaja} key={pedidos.id} onRouteChange={this.props.onRouteChange} />
         })
         if (pedidos.length === 0) {
             return (
