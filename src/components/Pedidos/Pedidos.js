@@ -100,8 +100,11 @@ class Pedidos extends React.Component {
         }).catch((e) => console.log(e));
     }
 
-    cambiarCantidad(cantidad) {
-        fetch(`http://localhost:8000/api/pedidos/${this.props.data.id}/productos/${this.state.productos.id}?cantidad=${cantidad}`, {
+    cambiarCantidad(producto_id,cantidad) {
+        alert(producto_id)
+        alert(cantidad)
+        alert(this.props.data.id)
+        fetch(`http://localhost:8000/api/pedidos/${this.props.data.id}/productos/${producto_id}?cantidad=${cantidad}`, {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json',
@@ -132,8 +135,8 @@ class Pedidos extends React.Component {
                     <tbody>
                         <tr className="table-light">
                             <td style={style}>{producto.nombre}</td>
-                            <td style={style}><input type="number" pattern="[0-9]" onChange={this.handleInputChange} name="cantidad" id="cantidad" placeholder={producto.cantidad}/></td>
-                            <td style={style}><Button onClick={() => this.cambiarCantidad(producto.cantidad)} value={producto.cantidad} color={"success"} className="center" size={"sm"}><FontAwesomeIcon icon={faCheckSquare} /></Button></td>
+                            <td style={style}><input type="number" pattern="[0-9]" onChange={this.handleInputChange} name="cantidad" id={"p"+ producto.id} placeholder={producto.cantidad}/></td>
+                            <td style={style}><Button onClick={() => this.cambiarCantidad(producto.id,document.getElementById("p" + producto.id).value)} value={producto.cantidad} color={"success"} className="center" size={"sm"}><FontAwesomeIcon icon={faCheckSquare} /></Button></td>
                         </tr>
                     </tbody>
                 </table>
