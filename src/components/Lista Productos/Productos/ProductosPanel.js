@@ -51,11 +51,13 @@ class ProductosPanel extends React.Component {
         // .then(json => this.setState({
         //     producto_id: json, cantidad: 10 
         // }))
-
          if (response.status !== 200 && response.status !== 204) {
              return alert('Debe registrarse para realizar esta accion.');
          }
 
+         if(response.status === 504){
+             alert('No se puede agregar dos veces el mismo producto al carrito');
+         }
     }
 
     render() {

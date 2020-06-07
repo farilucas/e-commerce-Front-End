@@ -58,9 +58,8 @@ class Carrito extends React.Component {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
-        })
-
-        this.state.fetchData();
+        }).then(this.state.fetchData())
+        
     }
 
     render() {
