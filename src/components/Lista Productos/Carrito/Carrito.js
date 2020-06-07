@@ -11,6 +11,7 @@ class Carrito extends React.Component {
             estado: '',
         }
         this.onSubmitEstado = this.onSubmitEstado.bind(this)
+        this.fetchData = this.fetchData.bind(this)
     }
 
     componentDidMount() {

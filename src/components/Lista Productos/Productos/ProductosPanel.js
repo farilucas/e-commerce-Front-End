@@ -46,10 +46,11 @@ class ProductosPanel extends React.Component {
                 }],
                 this.state.cantidad,
             )
-        }).then(res => res.json())
-        .then(json => this.setState({
-            producto_id: json, cantidad: 10 
-        }))
+        })
+        //.then(res => res.json())
+        // .then(json => this.setState({
+        //     producto_id: json, cantidad: 10 
+        // }))
 
          if (response.status !== 200 && response.status !== 204) {
              return alert('Debe registrarse para realizar esta accion.');
@@ -59,12 +60,11 @@ class ProductosPanel extends React.Component {
 
     render() {
         let boton = localStorage.getItem('token') === null ? "" : <button onClick = {this.agregarAlCarrito} className = "b mr-3 pv2 input-reset mt3 ba b--black hover-bg-lightest-blue pointer w-100" > Agregar al Carrito! </button> 
-        if (localStorage.getItem('admin') === '1' && localStorage.getItem('admin') != null){
+        if (localStorage.getItem('admin') === '1' && localStorage.getItem('admin') !== null){
             return (
                 <Container className="table table-bordered table-sm bg-moon-gray b--black mt-4">
                     <Row className="b--black">
                         <Col className="b--black">
-                            <p>UWU</p>
                             <div className={"d-flex align-items-center py-1"}>
                                 {this.props.data.id}
                                 <Button onClick={this.onModificar} className={"ml-auto mr-2"} variant={"primary"} size={"sm"}><FontAwesomeIcon icon={faCog} /></Button>
@@ -96,7 +96,6 @@ class ProductosPanel extends React.Component {
                 <Container className="table table-bordered table-sm bg-moon-gray b--black mt-4">
                     <Row>
                         <Col>
-                        <p>UWU</p>
                             <table className="table table-sm b--black mt-3">
                                 <thead>
                                 <tr>
