@@ -49,6 +49,9 @@ class SignIn extends React.Component{
         localStorage.setItem("tokenHandler", refreshTokenHandle);
         localStorage.setItem('username', this.state.username);
         localStorage.setItem('admin', data.admin);
+        window.onbeforeunload = () => {
+            localStorage.clear();
+        }
         this.props.onRouteChange('Inicio');
     }
 
