@@ -61,15 +61,16 @@ class ProductosPanel extends React.Component {
         let boton = localStorage.getItem('token') === null ? "" : <button onClick = {this.agregarAlCarrito} className = "b mr-3 pv2 input-reset mt3 ba b--black hover-bg-lightest-blue pointer w-100" > Agregar al Carrito! </button> 
         if (localStorage.getItem('admin') === '1' && localStorage.getItem('admin') != null){
             return (
-                <Container className="table table-bordered table-sm bg-moon-gray b--black mt-5">
+                <Container className="table table-bordered table-sm bg-moon-gray b--black mt-4">
                     <Row className="b--black">
                         <Col className="b--black">
+                            <p>UWU</p>
                             <div className={"d-flex align-items-center py-1"}>
                                 {this.props.data.id}
                                 <Button onClick={this.onModificar} className={"ml-auto mr-2"} variant={"primary"} size={"sm"}><FontAwesomeIcon icon={faCog} /></Button>
                                 <Button variant={"danger"} size={"sm"} onClick={this.onBaja}><FontAwesomeIcon icon={faTrash} /></Button>
                             </div>
-                            <table className="table table-sm b--black">
+                            <table className="table table-sm b--black ">
                                 <thead className="b--black">
                                     <tr className="b--black">
                                         <td className="border b--black"><b>Nombre</b></td>
@@ -92,10 +93,11 @@ class ProductosPanel extends React.Component {
         }
         else{
             return(
-                <Container className="table table-bordered table-sm bg-moon-gray b--black mt-5">
+                <Container className="table table-bordered table-sm bg-moon-gray b--black mt-4">
                     <Row>
                         <Col>
-                            <table className="table table-sm b--black">
+                        <p>UWU</p>
+                            <table className="table table-sm b--black mt-3">
                                 <thead>
                                 <tr>
                                     <td className="border b--black"><b>Nombre</b></td>
