@@ -59,9 +59,9 @@ class ProductosPanel extends React.Component {
 
     render() {
         let boton = localStorage.getItem('token') === null ? "" : <button onClick = {this.agregarAlCarrito} className = "b mr-3 pv2 input-reset mt3 ba b--black hover-bg-lightest-blue pointer w-100" > Agregar al Carrito! </button> 
-        if (localStorage.getItem('admin') === '1'){
+        if (localStorage.getItem('admin') === '1' && localStorage.getItem('admin') != null){
             return (
-                <Container className="table table-bordered table-sm bg-moon-gray b--black ">
+                <Container className="table table-bordered table-sm bg-moon-gray b--black mt-5">
                     <Row className="b--black">
                         <Col className="b--black">
                             <div className={"d-flex align-items-center py-1"}>
@@ -92,7 +92,7 @@ class ProductosPanel extends React.Component {
         }
         else{
             return(
-                <Container className="table table-bordered table-sm b--black">
+                <Container className="table table-bordered table-sm bg-moon-gray b--black mt-5">
                     <Row>
                         <Col>
                             <table className="table table-sm b--black">

@@ -4,7 +4,7 @@ import Logo from './Logo.jpeg';
 const Navigation = ({ onRouteChange, isSignedIn, pagina }) => {
     if (isSignedIn) {
         return (
-            <nav style={{ display: 'flex', justifyContent: 'flex-end'}}>
+            <nav style={{ display: 'flex', justifyContent: 'flex-end', backgroundColor: '#342D2D', padding: '15px'}}>
                 <p onClick={() => onRouteChange('Inicio')} className='f3 link dim moon-gray underline pa3 pointer'>Inicio</p>
                 <p onClick={() => onRouteChange('Carrito')} className='f3 link dim moon-gray underline pa3 pointer'>Carrito</p>
                 <p onClick={() => onRouteChange('MisPedidos')} className='f3 link dim moon-gray underline pa3 pointer'>Mis Pedidos</p>
