@@ -50,7 +50,6 @@ class Productos extends React.Component{
                     producto_id: this.props.data.id,
                     cantidad: this.state.cantidad,
                 },
-                console.log(this.props.data.id, this.state.cantidad)
             )
         }).then(json => this.setState({
             cantidad: json
