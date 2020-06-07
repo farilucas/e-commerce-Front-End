@@ -30,19 +30,12 @@ class MisPedidos extends React.Component {
                 this.setState({
                     pedidos: json,
                 }))
-                .then(console.log(this.state.pedidos));
     };
   
     render() {
         let pedidos = this.state.pedidos.map(pedidos => {
             let pedidosData = { ...pedidos };
-            if (`${localStorage.getItem('admin')}` === 1)
-            {
-                return <Pedidos data={pedidosData} key={pedidos.id} />;
-            }
-            else{
                 return <PedidosUser data = {pedidosData} key = {pedidos.id}/>
-            }
         })
         if (pedidos.length === 0) {
             return (

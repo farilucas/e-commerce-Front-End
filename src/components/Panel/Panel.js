@@ -80,7 +80,7 @@ class Panel extends React.Component{
         })
 
         return(
-            <div className="">
+            <div>
                 {
                     productos
                 }

@@ -77,7 +77,7 @@ class PanelAdmin extends React.Component {
 
         return (
             <div className="flex flex-column">
-                <button className={"b ph3 pv2 input-reset ba b--black bg-transparent fr pointer w-20 self-end"} style={{ justifyContent: 'flex-end' }} onClick={() => this.props.onRouteChange('Alta')} >Dar de alta un producto</button>
+                <button className={"b ph3 pv2 input-reset ba b--moon-gray moon-gray bg-transparent fr pointer w-20 self-end"} style={{justifyContent: 'flex-end', }} onClick={() => this.props.onRouteChange('Alta')} >Dar de alta un producto</button>
                 {productos}
             </div>
         )

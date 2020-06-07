@@ -59,9 +59,9 @@ class SignIn extends React.Component{
                 <main className="pa4 black-80">
                     <div className="measure ">
                         <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-                            <legend className="f1 fw6 ph0 mh0">Ingresar</legend>
+                            <legend className="f1 fw6 ph0 moon-gray mh0">Ingresar</legend>
                             <div className="mt3">
-                                <label className="db fw6 lh-copy f6" htmlFor="bombre">Nombre</label>
+                                <label className="db fw6 lh-copy light-gray f6" htmlFor="bombre">Nombre</label>
                                 <input
                                     onChange={this.onNombreChange}
                                     className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
@@ -70,7 +70,7 @@ class SignIn extends React.Component{
                                     id="nombre" />
                             </div>
                             <div className="mv3">
-                                <label className="db fw6 lh-copy f6" htmlFor="password">Contraseña</label>
+                                <label className="db fw6 lh-copy light-gray f6" htmlFor="password">Contraseña</label>
                                 <input
                                     onChange={this.onPasswordChange}
                                     className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
@@ -82,7 +82,7 @@ class SignIn extends React.Component{
                         <div className="">
                             <input
                                 onClick={this.onSubmitSignIn}
-                                className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
+                                className="b ph3 pv2 input-reset ba b--black light-gray bg-transparent grow pointer f6 dib"
                                 type="submit"
                                 value="Ingresar" />
                         </div>
@@ -90,7 +90,7 @@ class SignIn extends React.Component{
                             <p
                                 onClick={() => this.props.onRouteChange('Register')}
                                 href="#0"
-                                className="f6 link dim black db pointer">Registrarse</p>
+                                className="f6 link dim light-gray db pointer">Registrarse</p>
                         </div>
                     </div>
                 </main>

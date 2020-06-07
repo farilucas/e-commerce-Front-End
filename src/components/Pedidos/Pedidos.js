@@ -13,7 +13,7 @@ class Pedidos extends React.Component {
             productos: [],
             todosProductos: [],
             selectedProducto: 1,
-            selectedEstado: 'Confirmado'
+            selectedEstado: []
         };
 
         this.onBaja = this.onBaja.bind(this);
@@ -119,9 +119,10 @@ class Pedidos extends React.Component {
         const style = {
             borderColor: "black"
         }
+        let total = this.props.data.productos.reduce((accumulator, current) => accumulator + current.precio * current.cantidad, 0);
         let productos = this.props.data.productos.map(producto => {
             return (
-                <table className="table table-bordered table-sm" style={style}>
+                <table className="table table-bordered table-sm" style={style} key={producto.id}>
                     <thead>
                         <tr className="table-light">
                             <th scope="col" style={style}>Nombre</th>
@@ -140,7 +141,7 @@ class Pedidos extends React.Component {
             );
         });
 
-        let options = this.state.todosProductos.map(producto => <option value={producto.id}>{producto.nombre}</option>);
+        let options = this.state.todosProductos.map(producto => <option value={producto.id} key={producto.id}>{producto.nombre}</option>);
         return (
             <table className="table table-bordered table-sm" style={style}>
                 <thead>
@@ -155,10 +156,13 @@ class Pedidos extends React.Component {
                         <td style={style}>{this.props.data.id}</td>
                         <td style={style}>{this.props.data.usuario_username}</td>
                         <td style={style}>
-                            <select value={this.state.selectedEstado} onChange={this.cambiarEstado}>
-                                <option value="pago">pago</option>
-                                <option value="entregado">entregado</option>
-                            </select>
+                            <form>
+                                <select value={this.state.selectedEstado} onChange={this.cambiarEstado}>
+                                    <option value={this.props.data.estado}>{this.props.data.estado}</option>
+                                    <option value="pago">Pago</option>
+                                    <option value="entregado">Entregado</option>
+                                </select>
+                            </form>
                         </td>
                     </tr>
                     <tr className="table-light">
@@ -192,6 +196,7 @@ class Pedidos extends React.Component {
                                             {productos}
                                         </div>
                                     </ul>
+                                    <td><strong>Precio total:</strong> ${total}</td>
                                 </ModalBody>
                                 <ModalFooter>
                                     <Button onClick={this.toggleModalOff}>Close</Button>

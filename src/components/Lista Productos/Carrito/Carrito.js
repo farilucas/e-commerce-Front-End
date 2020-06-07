@@ -46,7 +46,7 @@ class Carrito extends React.Component {
                 this.setState({ 
                     productos: json,
                     estado: 'carrito'
-                })).then(console.log(this.state.productos));
+                }))
     };
 
     async onBaja(event, id) {
@@ -59,7 +59,7 @@ class Carrito extends React.Component {
             }
         })
 
-        this.fetchData();
+        this.state.fetchData();
     }
 
     render() {
@@ -85,7 +85,7 @@ class Carrito extends React.Component {
         }
         return (
             <div>
-                <button onClick={this.onSubmitEstado} className="b pv2 ba b--black bg-orange pointer f6 fr w-100" style={{justifyContent: 'flex-end'}}>Finalizar Compra</button>
+                <button onClick={this.onSubmitEstado} onRouteChange={() => this.props.onRouteChange('Inicio')} className="b pv2 ba b--black bg-transparent hover-bg-orenge pointer f6 fr w-100" style={{justifyContent: 'flex-end'}}>Finalizar Compra</button>
                 {productos}
             </div>
         );

@@ -140,9 +140,9 @@ class App extends React.Component {
       case 'MisPedidos':
         currentComponent = (
           <div>
-            { localStorage.getItem('admin') === 0
-              ?<MisPedidos loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
-              :<MisPedidosAdmin loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
+            { localStorage.getItem('admin') === "1"
+              ?<MisPedidosAdmin loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
+              :<MisPedidos loadProducto={this.loadProducto} onRouteChange={this.onRouteChange} />
             }
           </div>
         );

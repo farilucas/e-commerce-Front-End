@@ -81,10 +81,10 @@ class Productos extends React.Component{
                         <td style={style}><input type="number" pattern="[0-9]" onChange={this.handleInputChange} name="cantidad" id="cantidad" placeholder={this.props.data.cantidad}></input></td>
                     </tr>
                     <tr className="table-light">
-                        <td colSpan="4"><button onClick={this.cambiarCantidad} value={this.state.cantidad} className="b pv2 input-reset ba b--black bg-transparent grow pointer f6 dib w-100">Confirmar Cantidad</button></td>
+                        <td colSpan="4"><button onClick={this.cambiarCantidad} value={this.state.cantidad} className="b pv2 input-reset ba b--black bg-transparent pointer f6 dib w-100">Confirmar Cantidad</button></td>
                     </tr>
                     <tr className="table-light">
-                        <td colSpan="4"><button onClick={this.onDetalles} className="b pv2 input-reset ba b--black bg-transparent grow pointer f6 dib w-100">Ver Detalles</button></td>
+                        <td colSpan="4"><button onClick={this.onDetalles} className="b pv2 input-reset ba b--black bg-transparent pointer f6 dib w-100">Ver Detalles</button></td>
                     </tr>
                 </tbody>
             </table>

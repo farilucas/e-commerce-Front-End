@@ -59,32 +59,29 @@ class ProductosPanel extends React.Component {
 
     render() {
         let boton = localStorage.getItem('token') === null ? "" : <button onClick = {this.agregarAlCarrito} className = "b mr-3 pv2 input-reset mt3 ba b--black hover-bg-lightest-blue pointer w-100" > Agregar al Carrito! </button> 
-        const style = {
-            borderColor: "black"
-        }
         if (localStorage.getItem('admin') === '1'){
             return (
-                <Container className="table table-bordered table-sm table-light" style={style}>
-                    <Row>
-                        <Col>
+                <Container className="table table-bordered table-sm bg-moon-gray b--black ">
+                    <Row className="b--black">
+                        <Col className="b--black">
                             <div className={"d-flex align-items-center py-1"}>
                                 {this.props.data.id}
                                 <Button onClick={this.onModificar} className={"ml-auto mr-2"} variant={"primary"} size={"sm"}><FontAwesomeIcon icon={faCog} /></Button>
                                 <Button variant={"danger"} size={"sm"} onClick={this.onBaja}><FontAwesomeIcon icon={faTrash} /></Button>
                             </div>
-                            <table className="table table-sm">
-                                <thead>
-                                    <tr>
-                                        <td className="border" style={style}><b>Nombre</b></td>
-                                        <td className="border" style={style}><b>Descripcion</b></td>
-                                        <td className="border" style={style}><b>Precio</b></td>
+                            <table className="table table-sm b--black">
+                                <thead className="b--black">
+                                    <tr className="b--black">
+                                        <td className="border b--black"><b>Nombre</b></td>
+                                        <td className="border b--black" ><b>Descripcion</b></td>
+                                        <td className="border b--black"><b>Precio</b></td>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr className="border">
-                                        <td className="border" style={style}>{this.props.data.nombre}</td>
-                                        <td className="border" style={style}>{this.props.data.descripcion}</td>
-                                        <td className="border" style={style}>${this.props.data.precio}</td>
+                                <tbody className="b--black">
+                                    <tr className="border b--black">
+                                        <td className="border b--black">{this.props.data.nombre}</td>
+                                        <td className="border b--black">{this.props.data.descripcion}</td>
+                                        <td className="border b--black">${this.props.data.precio}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -95,24 +92,24 @@ class ProductosPanel extends React.Component {
         }
         else{
             return(
-                <Container className="table table-bordered table-sm table-light" style={style}>
+                <Container className="table table-bordered table-sm b--black">
                     <Row>
                         <Col>
-                            <table className="table table-sm">
+                            <table className="table table-sm b--black">
                                 <thead>
                                 <tr>
-                                    <td className="border" style={style}><b>Nombre</b></td>
-                                    <td className="border" style={style}><b>Descripcion</b></td>
-                                    <td className="border" style={style}><b>Precio</b></td>
+                                    <td className="border b--black"><b>Nombre</b></td>
+                                    <td className="border b--black"><b>Descripcion</b></td>
+                                    <td className="border b--black"><b>Precio</b></td>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr className="border">
-                                    <td className="border" style={style}>{this.props.data.nombre}</td>
-                                    <td className="border" style={style}>{this.props.data.descripcion}</td>
-                                    <td className="border" style={style}>${this.props.data.precio}</td>
+                                <tr className="border b--black">
+                                    <td className="border b--black">{this.props.data.nombre}</td>
+                                    <td className="border b--black">{this.props.data.descripcion}</td>
+                                    <td className="border b--black">${this.props.data.precio}</td>
                                 </tr>
-                                <tr className="border" style={style}>
+                                <tr className="border b--black">
                                     <td colSpan="3">
                                         <div className={'d-flex'}>
                                             {boton}

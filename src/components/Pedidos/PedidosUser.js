@@ -60,7 +60,7 @@ export default class PedidosUser extends React.Component {
         let productos = this.props.data.productos.map(producto => {
             
             return (
-                <table className="table table-bordered table-sm" style={style}>
+                <table className="table table-bordered table-sm" style={style} key={producto.id}>
                     <thead>
                         <tr className="table-light">
                             <th scope="col" style={style}>Nombre</th>
@@ -77,7 +77,7 @@ export default class PedidosUser extends React.Component {
             );
         });
         return (
-            <table className="table table-bordered table-sm" style={style}>
+            <table className="table table-bordered table-sm" style={style} key={productos.id}>
                 <thead>
                     <tr className="table-light">
                         <th scope="col" style={style}>Id</th>
@@ -105,7 +105,7 @@ export default class PedidosUser extends React.Component {
                                 </ModalHeader>
                                 <ModalBody>
                                     <ul>
-                                        <div key={productos.id}>
+                                        <div>
                                             {productos}
                                         </div>
                                     </ul>
