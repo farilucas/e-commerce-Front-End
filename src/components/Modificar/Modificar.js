@@ -13,6 +13,10 @@ class Modificar extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         
     }
+
+    componentDidMount(){
+        this.setState(this.props.producto)
+    }
     handleInputChange(event) {
         const target = event.target;
         const value = target.value;
@@ -25,7 +29,7 @@ class Modificar extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        fetch('http://localhost:8000/api/productos/' + this.props.producto, {
+        fetch('http://localhost:8000/api/productos/' + this.props.producto.id, {
             method: 'put',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}`},
             body: JSON.stringify(

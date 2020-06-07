@@ -20,7 +20,7 @@ class ProductosPanel extends React.Component {
     }
 
     onModificar() {
-        this.props.onRouteChange('Modificar', this.props.data.id);
+        this.props.onRouteChange('Modificar', this.props.data);
     }
 
     onBaja(e) {
