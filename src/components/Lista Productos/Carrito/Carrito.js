@@ -11,7 +11,6 @@ class Carrito extends React.Component {
             estado: '',
         }
         this.onSubmitEstado = this.onSubmitEstado.bind(this)
-        this.fetchData = this.fetchData.bind(this)
     }
 
     componentDidMount() {
@@ -58,14 +57,15 @@ class Carrito extends React.Component {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
-        }).then(this.state.fetchData())
-        
+        })
+
+        this.fetchData();        
     }
 
     render() {
         let productos = this.state.productos.map(productos => {
         let productData = { ...productos };
-            return <ProductosCarrito data={productData} key={productos.id} onBaja={this.onBaja} onRouteChange={this.props.onRouteChange} />;
+            return <ProductosCarrito data={productData} key={productos.id} onBaja={this.onBaja.bind(this)} onRouteChange={this.props.onRouteChange} />;
         })
         if (productos.length === 0) {
             return (
