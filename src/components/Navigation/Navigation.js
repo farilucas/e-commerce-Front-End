@@ -13,7 +13,7 @@ const Navigation = ({ onRouteChange, isSignedIn, pagina }) => {
         );
     } else {
         return (
-            <nav style={{ display: 'flex', justifyContent: 'flex-end', backgroundColor: '#342D2D', padding: '30px' }}>
+            <nav style={{ display: 'flex', justifyContent: 'flex-end', backgroundColor: '#342D2D', padding: '15px' }}>
                 {/* <p onClick={() => onRouteChange('Inicio')} className='f3 link dim black  underline pa3 pointer'>Inicio</p> */}
                 <p onClick={() => onRouteChange('Ingresar')} className='f3 link dim moon-gray underline pa3 pointer'>Ingrese</p>
                 <p onClick={() => onRouteChange('Registrarse')} className='f3 link dim moon-gray underline pa3 pointer'>Registrarse</p>
