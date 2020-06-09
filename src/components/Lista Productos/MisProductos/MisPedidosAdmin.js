@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from 'reactstrap';
+import { Circular } from 'styled-loaders-react'; 
 import Pedidos from "../../Pedidos/Pedidos";
 
 
@@ -10,10 +11,12 @@ class MisPedidosAdmin extends React.Component {
         this.state = {
             pedidos: [],
             estado: '',
+            isLoading: false
         }
     }
 
     componentDidMount() {
+        this.setState({isLoading: true})
         this.fetchData()
     }
 
@@ -31,6 +34,7 @@ class MisPedidosAdmin extends React.Component {
             .then(json =>
                 this.setState({
                     pedidos: json,
+                    isLoading: false
                 }))
     };
 
@@ -69,7 +73,7 @@ class MisPedidosAdmin extends React.Component {
         }
         return (
             <div>
-                {pedidos}
+                {this.state.isLoading ? <h1 className='moon-gray' style={{ marginTop: '10%' }}>Loading <Circular color='white' /></h1> :pedidos}
             </div>
         );
     }

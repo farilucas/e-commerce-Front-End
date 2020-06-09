@@ -1,4 +1,5 @@
 import React from 'react';
+import { Circular } from 'styled-loaders-react'; 
 import ProductosPanel from "../Lista Productos/Productos/ProductosPanel";
 
 class PanelAdmin extends React.Component {
@@ -8,10 +9,12 @@ class PanelAdmin extends React.Component {
             productos: [],
             admin: true,
             categoria: 'Todos',
+            isLoading: false
         }
     }
 
     componentDidMount() {
+        this.setState({isLoading: true})
         this.fetchData();
     }
 
@@ -37,7 +40,7 @@ class PanelAdmin extends React.Component {
 
         response = await response.json();
 
-        this.setState({ productos: response });
+        this.setState({ productos: response, isLoading: false });
     }
 
     async onBaja(event, id) {
@@ -76,9 +79,14 @@ class PanelAdmin extends React.Component {
         });
 
         return (
-            <div className="flex flex-column">
-                <button className={"b ph3 pv2 input-reset ba b--moon-gray moon-gray bg-transparent fr pointer w-20 self-end"} style={{justifyContent: 'flex-end', }} onClick={() => this.props.onRouteChange('Alta')} >Dar de alta un producto</button>
-                {productos}
+            <div>
+                {
+                    this.state.isLoading ? <h1 className='moon-gray' style={{ marginTop: '10%' }}>Loading <Circular color='white' /></h1>
+                    :<div className="flex flex-column">
+                        <button className={"b ph3 pv2 input-reset ba b--moon-gray moon-gray bg-transparent fr pointer w-20 self-end"} style={{justifyContent: 'flex-end', }} onClick={() => this.props.onRouteChange('Alta')} >Dar de alta un producto</button>
+                        {productos}
+                    </div>
+                }
             </div>
         )
     }
