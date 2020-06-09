@@ -1,4 +1,5 @@
 import React from 'react';
+import { Circular } from 'styled-loaders-react';
 import ProductosPanel from "../Lista Productos/Productos/ProductosPanel";
 
 class Panel extends React.Component{
@@ -8,10 +9,12 @@ class Panel extends React.Component{
             productos: [],
             usuarios: [],
             categoria: 'Todos',
+            isLoading: false
         }
     }
 
     componentDidMount() {
+        this.setState({isLoading: true})
         this.fetchData();
     }
 
@@ -28,7 +31,7 @@ class Panel extends React.Component{
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
         }).then(res => res.json())
-        .then(json => this.setState({productos: json}));
+            .then(json => this.setState({ productos: json, isLoading: false}));
     };
 
     async onBaja(event, id) {
@@ -81,9 +84,7 @@ class Panel extends React.Component{
 
         return(
             <div>
-                {
-                    productos
-                }
+                {this.state.isLoading ? <h1 className='moon-gray' style={{marginTop: '10%'}}>Loading <Circular color='white'/></h1> : productos}
             </div>
         )
     }

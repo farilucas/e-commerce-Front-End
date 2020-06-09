@@ -15,7 +15,6 @@ class SignIn extends React.Component{
     onPasswordChange = (event) => {
         this.setState({password: event.target.value });
     }
-
    
     onSubmitSignIn = async (event) => {
         event.preventDefault();
@@ -91,9 +90,9 @@ class SignIn extends React.Component{
                         </div>
                         <div className="lh-copy mt3">
                             <p
-                                onClick={() => this.props.onRouteChange('Register')}
+                                onClick={() => this.props.onRouteChange('Registrarse')}
                                 href="#0"
-                                className="f6 link dim light-gray db pointer">Registrarse</p>
+                                className="f6 link dim light-gray db grow pointer">Registrarse</p>
                         </div>
                     </div>
                 </main>

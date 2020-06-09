@@ -11,7 +11,6 @@ class Productos extends React.Component{
         }
         this.onModificar = this.onModificar.bind(this);
         this.onBaja = this.onBaja.bind(this);
-        this.onDetalles = this.onDetalles.bind(this);
         this.cambiarCantidad = this.cambiarCantidad.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
     }
@@ -32,10 +31,6 @@ class Productos extends React.Component{
 
     onBaja(e) {
         this.props.onBaja(e, this.props.data.id);
-    }
-
-    onDetalles() {
-        this.props.onRouteChange('Detalles', this.props.data.id);
     }
 
     cambiarCantidad() {
@@ -81,9 +76,6 @@ class Productos extends React.Component{
                     </tr>
                     <tr className="table-light">
                         <td colSpan="4"><button onClick={this.cambiarCantidad} value={this.state.cantidad} className="b pv2 input-reset ba b--black bg-transparent pointer f6 dib w-100">Confirmar Cantidad</button></td>
-                    </tr>
-                    <tr className="table-light">
-                        <td colSpan="4"><button onClick={this.onDetalles} className="b pv2 input-reset ba b--black bg-transparent pointer f6 dib w-100">Ver Detalles</button></td>
                     </tr>
                 </tbody>
             </table>
