@@ -62,8 +62,8 @@ class Pedidos extends React.Component {
         this.setState({ open: false });
     }
 
-    onBaja(id) {
-        this.props.onBaja(id);
+    onBaja(pedidoId, id) {
+        this.props.onBaja(pedidoId, id);
     }
 
     cambiarEstado(e){
@@ -87,7 +87,7 @@ class Pedidos extends React.Component {
 
     onSubmitProducto(event) {
         event.preventDefault();
-        fetch(`http://localhost:8000/api/pedidos/${this.props.pedidos.id}/productos`, {
+        fetch(`http://localhost:8000/api/pedidos/${this.props.data.id}/productos`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
@@ -101,9 +101,6 @@ class Pedidos extends React.Component {
     }
 
     cambiarCantidad(producto_id,cantidad) {
-        alert(producto_id)
-        alert(cantidad)
-        alert(this.props.data.id)
         fetch(`http://localhost:8000/api/pedidos/${this.props.data.id}/productos/${producto_id}?cantidad=${cantidad}`, {
             method: 'put',
             headers: {
@@ -129,7 +126,7 @@ class Pedidos extends React.Component {
                         <tr className="table-light">
                             <th scope="col" style={style}>Nombre</th>
                             <th scope="col" style={style}>Cantidad</th>
-                            <th scope="col" style={style}><Button color={"danger"} className="center" size={"sm"} onClick={() => this.onBaja(producto.id)}><FontAwesomeIcon icon={faTrash} /></Button></th>
+                            <th scope="col" style={style}><Button color={"danger"} className="center" size={"sm"} onClick={() => this.onBaja(this.props.data.id, producto.id)}><FontAwesomeIcon icon={faTrash} /></Button></th>
                         </tr>
                     </thead>
                     <tbody>
