@@ -46,10 +46,7 @@ class Productos extends React.Component{
                     cantidad: this.state.cantidad,
                 },
             )
-        }).then(json => this.setState({
-            cantidad: json
-        }))
-
+        })
     }
 
     render() {

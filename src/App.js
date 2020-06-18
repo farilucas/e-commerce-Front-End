@@ -10,6 +10,7 @@ import Modificar from './components/Modificar/Modificar';
 import Navigation from './components/Navigation/Navigation';
 import Register from './components/Register/Register';
 import SignIn from './components/SignIn/SignIn';
+import ResetPassword from './components/SignIn/ResetPassword';
 import './App.css';
 
 const particleOptions = {
@@ -101,15 +102,14 @@ class App extends React.Component {
       this.setState({ pagina: 'registrarse', route });
     } else if (route === 'Ingresar') {
       this.setState({ pagina: 'ingresar', route });
+    } else if (route === 'ResetPassword') {
+      this.setState({ pagina: 'ResetPassword', route });
     }
   }
 
   render(){
     const { isSignedIn, route, pagina} = this.state;
     let currentComponent;
-    // if (localStorage.getItem('admin') === null){
-    //   localStorage.setItem('admin')
-    // }
     switch (route) {
       default:
       case 'Inicio':
@@ -165,6 +165,13 @@ class App extends React.Component {
         currentComponent = (
           <div>
             <SignIn isSignedIn={isSignedIn} loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
+          </div>
+        );
+        break;
+      case 'ResetPassword':
+        currentComponent = (
+          <div>
+            <ResetPassword onRouteChange={this.onRouteChange} />
           </div>
         );
           

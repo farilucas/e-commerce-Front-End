@@ -63,7 +63,7 @@ class SignIn extends React.Component{
                         <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
                             <legend className="f1 fw6 ph0 moon-gray mh0">Ingresar</legend>
                             <div className="mt3">
-                                <label className="db fw6 lh-copy light-gray f6" htmlFor="bombre">Nombre</label>
+                                <label className="db fw6 lh-copy light-gray f6" htmlFor="nombre">Nombre</label>
                                 <input
                                     onChange={this.onNombreChange}
                                     className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
@@ -93,6 +93,12 @@ class SignIn extends React.Component{
                                 onClick={() => this.props.onRouteChange('Registrarse')}
                                 href="#0"
                                 className="f6 link dim light-gray db grow pointer">Registrarse</p>
+                        </div>
+                        <div className="lh-copy mt3">
+                            <p
+                                onClick={() => this.props.onRouteChange('ResetPassword')}
+                                href="#0"
+                                className="f6 link dim light-gray db grow pointer">forgot password?</p>
                         </div>
                     </div>
                 </main>

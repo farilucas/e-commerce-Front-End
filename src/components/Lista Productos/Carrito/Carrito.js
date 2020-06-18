@@ -71,34 +71,36 @@ class Carrito extends React.Component {
         let productData = { ...productos };
             return <ProductosCarrito data={productData} key={productos.id} onBaja={this.onBaja.bind(this)} onRouteChange={this.props.onRouteChange} />;
         })
-        // if (productos.length === 0) {
-        //     return (
-        //         <article className="br3 ba  b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
-        //             <main className="pa4 black-80">
-        //                 <div className="measure ">
-        //                     <fieldset className="ba b--transparent ph0 mh0">
-        //                         <legend className="f1 fw6 ph0 mh0">No hay datos registrados en el sistema.</legend>
-        //                         <div className="">
-        //                             <Button className={"b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"} onClick={() => this.props.onRouteChange('Inicio')} >Volver al Inicio</Button>
-        //                         </div>
-        //                     </fieldset>
-        //                 </div>
-        //             </main>
-        //         </article>
-        //     );
-        // }
-        return (
-            <div>
-                {
-                    this.state.isLoading ? <h1 className='moon-gray' style={{ marginTop: '15%' }}>Cargando datos <Circular color='white' /></h1>
+
+        if(productos.lenght !== 0){
+            return (
+                <div>
+                    {
+                    this.state.isLoading ? <h1 className='moon-gray' style={{ marginTop: '15%' }}> Cargando datos <Circular color='white' /></h1>
                     :<div>
                         <button onClick={this.onSubmitEstado} onRouteChange={() => this.props.onRouteChange('Inicio')} className="b pv2 ba b--black hover-bg-orange pointer f6 fr w-100" style={{justifyContent: 'flex-end'}}>Finalizar Compra</button>
                         {productos}
                     </div>
-                }
-                
-            </div>
-        );
+                    }
+                </div>
+            );
+        }
+        else{
+            return (
+                <article className="br3 ba  b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
+                    <main className="pa4 black-80">
+                        <div className="measure ">
+                            <fieldset className="ba b--transparent ph0 mh0">
+                                <legend className="f1 fw6 ph0 mh0">No hay datos registrados en el sistema.</legend>
+                                <div className="">
+                                    <Button className={"b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"} onClick={() => this.props.onRouteChange('Inicio')} >Volver al Inicio</Button>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </main>
+                </article>
+            );
+        }
     }
 }
 export default Carrito;
