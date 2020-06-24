@@ -64,6 +64,8 @@ class ProductosPanel extends React.Component {
 
     render() {
         let boton = localStorage.getItem('token') === null ? "" : <button onClick = {this.agregarAlCarrito} className = "b mr-3 pv2 input-reset mt3 ba b--black hover-bg-lightest-blue pointer w-100" > Agregar al Carrito! </button> 
+        let precio = localStorage.getItem('token') === null ? "" : <td className="border b--black">${this.props.data.precio}</td>
+        let precioTabla = localStorage.getItem('token') === null ? "" : <td className="border b--black"><b>Precio</b></td>
         if (localStorage.getItem('admin') === '1' && localStorage.getItem('admin') !== null){
             return (
                 <Container className="table table-bordered table-sm bg-moon-gray b--black mt-4">
@@ -103,16 +105,16 @@ class ProductosPanel extends React.Component {
                             <table className="table table-sm b--black mt-3">
                                 <thead>
                                 <tr>
-                                    <td className="border b--black"><b>Nombre</b></td>
-                                    <td className="border b--black"><b>Descripcion</b></td>
-                                    <td className="border b--black"><b>Precio</b></td>
+                                    <td colSpan="1" className="border b--black"><b>Nombre</b></td>
+                                    <td colSpan="1" className="border b--black"><b>Descripcion</b></td>
+                                    {precioTabla}
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr className="border b--black">
-                                    <td className="border b--black">{this.props.data.nombre}</td>
-                                    <td className="border b--black">{this.props.data.descripcion}</td>
-                                    <td className="border b--black">${this.props.data.precio}</td>
+                                    <td colSpan="1" className="border b--black">{this.props.data.nombre}</td>
+                                    <td colSpan="1" className="border b--black">{this.props.data.descripcion}</td>
+                                    {precio}
                                 </tr>
                                 <tr className="border b--black">
                                     <td colSpan="3">

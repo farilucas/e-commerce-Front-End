@@ -72,7 +72,11 @@ class PanelAdmin extends React.Component {
             );
         }
 
-        let productos = this.state.productos.map(producto => {
+        let productos = this.state.productos.sort((a, b) => {
+            if (a.nombre < b.nombre) { return -1; }
+            if (a.nombre > b.nombre) { return 1; }
+            return 0;
+        }).map(producto => {
             let productData = { ...producto };
 
             return <ProductosPanel data={productData} key={producto.id} onBaja={this.onBaja.bind(this)} onRouteChange={this.props.onRouteChange} />;

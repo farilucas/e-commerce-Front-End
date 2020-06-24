@@ -65,12 +65,16 @@ export default class PedidosUser extends React.Component {
                         <tr className="table-light">
                             <th scope="col" style={style}>Nombre</th>
                             <th scope="col" style={style}>Cantidad</th>
+                            <th scope="col" style={style}>Precio Ind.</th>
+                            <th scope="col" style={style}>Precio Total</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr className="table-light">
                             <td style={style}>{producto.nombre}</td>
                             <td style={style}>{producto.cantidad}</td>
+                            <td style={style}>{producto.precio}</td>
+                            <td style={style}>{producto.precio * producto.cantidad}</td>
                         </tr>
                     </tbody>
                 </table>

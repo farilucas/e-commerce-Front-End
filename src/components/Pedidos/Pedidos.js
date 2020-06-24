@@ -70,7 +70,7 @@ class Pedidos extends React.Component {
         this.setState({selectedEstado: e.target.value})
     }
 
-    onEstadoChange(event) {
+    onEstadoChange(event, estado) {
         event.preventDefault();
         fetch(`http://localhost:8000/api/pedidos/${this.props.data.id}`, {
             method: 'put',
@@ -80,7 +80,7 @@ class Pedidos extends React.Component {
                 'Accept': 'application/json'
             },
             body: JSON.stringify({
-                estado: this.state.selectedEstado
+                estado: estado
             })
         }).catch((e) => console.log(e));
     }
@@ -118,6 +118,7 @@ class Pedidos extends React.Component {
         const style = {
             borderColor: "black"
         }
+        let botonEstado = this.props.data.estado === "pendiente" ? <button className="b pv2 input-reset ba b--black bg-transparent pointer f6 dib w-100" onClick={(e) => this.onEstadoChange(e, "Pago")}>Cambiar estado</button> : <button className="b pv2 input-reset ba b--black bg-transparent pointer f6 dib w-100" onClick={(e) => this.onEstadoChange(e,"Entregado")}>Entregar</button>
         let total = this.props.data.productos.reduce((accumulator, current) => accumulator + current.precio * current.cantidad, 0);
         let productos = this.props.data.productos.map(producto => {
             return (
@@ -155,18 +156,12 @@ class Pedidos extends React.Component {
                         <td style={style}>{this.props.data.id}</td>
                         <td style={style}>{this.props.data.usuario_username}</td>
                         <td style={style}>
-                            <form>
-                                <select value={this.props.data.estado} onChange={this.cambiarEstado}>
-                                    <option value={this.props.data.estado}>{this.props.data.estado}</option>
-                                    <option value="pago">Pago</option>
-                                    <option value="entregado">Entregado</option>
-                                </select>
-                            </form>
+                            {this.props.data.estado}
                         </td>
                     </tr>
                     <tr className="table-light">
                         <td colSpan="4">
-                            <button onClick={this.onEstadoChange} className="b pv2 input-reset ba b--black bg-transparent pointer f6 dib w-100">Cambiar estado</button>
+                            {botonEstado}
                         </td>
                     </tr>
                     <tr className="table-light">
