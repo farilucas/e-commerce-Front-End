@@ -105,6 +105,9 @@ class App extends React.Component {
     } else if (route === 'ResetPassword') {
       this.setState({ pagina: 'ResetPassword', route });
     }
+    else if (route === 'Inicio2') {
+      this.setState({isSignedIn: false, pagina: 'inicio', route });
+    }
   }
 
   render(){

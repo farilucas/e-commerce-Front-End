@@ -46,21 +46,27 @@ class Register extends React.Component{
     }
 
 
-    onSubmitRegister(event) {
+    async onSubmitRegister(event) {
         event.preventDefault();
-        fetch('http://'+ window.location.hostname +':8000/api/usuarios', {
+        
+        let res = await fetch('http://'+ window.location.hostname +':8000/api/usuarios', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
-                "Access-Control-Allow-Origin": "*",
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
+                "Access-Control-Allow-Origin": "*"
             },
             body: JSON.stringify(
-                this.state,
-                console.log(this.state)
+                this.state
             )
-        })
-        .then(() => this.props.onRouteChange('Inicio'));
+        });
+        
+        if(res.status === 200) {
+            alert("Verifique su email para poder acceder a todas las funcionalidades.");
+            this.props.onRouteChange('Inicio2');
+        }
+        else {
+            alert("El Usuario o Email ya esta en uso.");
+        }
     }
 
     render() {
