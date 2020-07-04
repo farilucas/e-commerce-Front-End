@@ -32,7 +32,7 @@ class Pedidos extends React.Component {
     }
 
     async fetchProductos() {
-        let json = await fetch(`http://localhost:8000/api/productos`, {
+        let json = await fetch('http://'+ window.location.hostname +':8000/api/productos', {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
@@ -72,7 +72,7 @@ class Pedidos extends React.Component {
 
     onEstadoChange(event, estado) {
         event.preventDefault();
-        fetch(`http://localhost:8000/api/pedidos/${this.props.data.id}`, {
+        fetch(`http://`+ window.location.hostname +`/api/pedidos/${this.props.data.id}`, {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ class Pedidos extends React.Component {
 
     onSubmitProducto(event) {
         event.preventDefault();
-        fetch(`http://localhost:8000/api/pedidos/${this.props.data.id}/productos`, {
+        fetch(`http://`+ window.location.hostname +`:8000/api/pedidos/${this.props.data.id}/productos`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',

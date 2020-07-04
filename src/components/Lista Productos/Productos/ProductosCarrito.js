@@ -34,7 +34,7 @@ class Productos extends React.Component{
     }
 
     cambiarCantidad() {
-        fetch(`http://localhost:8000/api/usuarios/carrito`, {
+        fetch(`http://`+ window.location.hostname +`:8000/api/usuarios/carrito`, {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json',

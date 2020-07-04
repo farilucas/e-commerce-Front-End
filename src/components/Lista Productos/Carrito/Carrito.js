@@ -22,7 +22,7 @@ class Carrito extends React.Component {
 
     onSubmitEstado(event) {
         event.preventDefault();
-        fetch(`http://localhost:8000/api/usuarios/carrito/pagar`, {
+        fetch(`http://`+ window.location.hostname +`:8000/api/usuarios/carrito/pagar`, {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ class Carrito extends React.Component {
     async fetchData() {
         this.setState({ isFetching: true });
 
-        await fetch(`http://localhost:8000/api/usuarios/carrito`, {
+        await fetch(`http://`+ window.location.hostname +`:8000/api/usuarios/carrito`, {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
@@ -55,7 +55,7 @@ class Carrito extends React.Component {
 
     async onBaja(event, id) {
         event.preventDefault();
-        await fetch(`http://localhost:8000/api/usuarios/carrito/` + id, {
+        await fetch(`http://`+ window.location.hostname +`:8000/api/usuarios/carrito/` + id, {
             method: 'delete',
             headers: {
                 'Content-Type': 'application/json',

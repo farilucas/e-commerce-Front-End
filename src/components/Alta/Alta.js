@@ -25,7 +25,7 @@ class Alta extends React.Component{
 
     onSubmitAlta(event){
         event.preventDefault();
-        fetch('http://localhost:8000/api/productos',{
+        fetch('http://'+ window.location.hostname +':8000/api/productos',{
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',

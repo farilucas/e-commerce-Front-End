@@ -24,7 +24,7 @@ class MisPedidosAdmin extends React.Component {
     async fetchData() {
         this.setState({ isFetching: true });
 
-        await fetch(`http://localhost:8000/api/pedidos`, {
+        await fetch(`http://`+ window.location.hostname +`:8000/api/pedidos`, {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
@@ -39,7 +39,7 @@ class MisPedidosAdmin extends React.Component {
     };
 
     async onBaja(pedidoId, id) {
-        await fetch(`http://localhost:8000/api/pedidos/${pedidoId}/productos/` + id, {
+        await fetch(`http://`+ window.location.hostname +`:8000/api/pedidos/${pedidoId}/productos/` + id, {
             method: 'delete',
             headers: {
                 'Content-Type': 'application/json',

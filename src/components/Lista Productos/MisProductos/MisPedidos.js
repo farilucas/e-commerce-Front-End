@@ -22,7 +22,7 @@ class MisPedidos extends React.Component {
     async fetchData() {
         this.setState({ isFetching: true });
 
-        await fetch(`http://localhost:8000/api/pedidos?username=${localStorage.getItem('username')}`, {
+        await fetch(`http://`+ window.location.hostname +`:8000/api/pedidos?username=${localStorage.getItem('username')}`, {
             method: "get",
             headers: {
                 "Content-Type": "application/json",

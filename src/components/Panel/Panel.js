@@ -24,7 +24,7 @@ class Panel extends React.Component{
 
     async fetchData() {
         this.setState({ isFetching: true });
-        await fetch(`http://localhost:8000/api/productos`, {
+        await fetch(`http://`+ window.location.hostname +`:8000/api/productos`, {
             method: "get",
             headers: { 
                 "Content-Type": "application/json",
@@ -36,7 +36,7 @@ class Panel extends React.Component{
 
     async onBaja(event, id) {
         event.preventDefault();
-        await fetch('http://localhost:8000/api/productos/', {
+        await fetch('http://'+ window.location.hostname +':8000/api/productos/', {
             method: 'delete',
             headers: { 
                 'Content-Type': 'application/json',

@@ -29,7 +29,7 @@ class Modificar extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        fetch('http://localhost:8000/api/productos/' + this.props.producto.id, {
+        fetch('http://'+ window.location.hostname +':8000/api/productos/' + this.props.producto.id, {
             method: 'put',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}`},
             body: JSON.stringify(

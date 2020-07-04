@@ -19,7 +19,7 @@ class SignIn extends React.Component{
     onSubmitSignIn = async (event) => {
         event.preventDefault();
 
-        let response = await fetch('http://localhost:8000/api/login', {
+        let response = await fetch('http://'+ window.location.hostname +':8000/api/login', {
             method: 'POST',
             headers: {
                 "Access-Control-Allow-Origin": "*",

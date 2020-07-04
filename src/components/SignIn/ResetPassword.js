@@ -14,7 +14,7 @@ export default class ResetPassword extends React.Component{
 
     resetButton = async (event) => {
         event.preventDefault();
-        await fetch(`http://localhost:8000/api/usuarios/${this.state.username}/password/email`,{
+        await fetch('http://'+ window.location.hostname +`:8000/api/usuarios/${this.state.username}/password/email`,{
             method: 'get'
         })
     }

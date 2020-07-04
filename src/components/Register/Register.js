@@ -48,7 +48,7 @@ class Register extends React.Component{
 
     onSubmitRegister(event) {
         event.preventDefault();
-        fetch('http://localhost:8000/api/usuarios', {
+        fetch('http://'+ window.location.hostname +':8000/api/usuarios', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',

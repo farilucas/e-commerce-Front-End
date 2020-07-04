@@ -12,10 +12,10 @@ class PanelAdmin extends React.Component {
     componentDidMount() {
         this.fetchData();
     }
-
+    
     async fetchData() {
         this.setState({ isFetching: true });
-       await fetch(`http://localhost:8000/api/pedido_producto`, {
+       await fetch(`http://`+ window.location.hostname +`:8000/api/pedido_producto`, {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
@@ -27,7 +27,7 @@ class PanelAdmin extends React.Component {
 
     async onBaja(event, id) {
         event.preventDefault();
-        await fetch('http://localhost:8000/api/pedido_producto/' + id, {
+        await fetch('http://'+ window.location.hostname +':8000/api/pedido_producto/' + id, {
             method: 'delete',
             headers: {
                 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}`,

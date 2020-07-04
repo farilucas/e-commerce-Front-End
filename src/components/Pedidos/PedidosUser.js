@@ -24,7 +24,7 @@ export default class PedidosUser extends React.Component {
     }
 
     async fetchProductos() {
-        let json = await fetch(`http://localhost:8000/api/productos`, {
+        let json = await fetch('http://'+ window.location.hostname +':8000/api/productos', {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
