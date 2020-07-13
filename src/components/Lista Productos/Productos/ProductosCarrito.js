@@ -69,7 +69,7 @@ class Productos extends React.Component{
                         <td style={style}>{this.props.data.nombre}</td>
                         <td style={style}>{this.props.data.descripcion}</td>
                         <td style={style}>${this.props.data.precio}</td>
-                        <td style={style}><input type="number" pattern="[0-9]" onChange={this.handleInputChange} name="cantidad" id="cantidad" placeholder={this.props.data.cantidad}></input></td>
+                        <td style={style}><input type="number" min={1} onChange={this.handleInputChange} name="cantidad" id="cantidad" placeholder={this.props.data.cantidad}></input></td>
                     </tr>
                     <tr className="table-light">
                         <td colSpan="4"><button onClick={this.cambiarCantidad} value={this.state.cantidad} className="b pv2 input-reset ba b--black bg-transparent pointer f6 dib w-100">Confirmar Cantidad</button></td>

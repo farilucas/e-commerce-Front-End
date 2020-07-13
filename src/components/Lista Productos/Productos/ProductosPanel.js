@@ -42,7 +42,7 @@ class ProductosPanel extends React.Component {
             body: JSON.stringify(
                 [{
                     producto_id: this.props.data.id,
-                    cantidad: 0
+                    cantidad: 1
                 }],
                 this.state.cantidad,
             )
